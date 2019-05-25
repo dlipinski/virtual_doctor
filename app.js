@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use('/', routes())
 
-mongoose.connect()
+mongoose.connect('mongodb://localhost:27017/myapp', {useNewUrlParser: true})
 
 app.listen(3000, () => {
     console.log('App listening on port 3000')
