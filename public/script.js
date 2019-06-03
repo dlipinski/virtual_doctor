@@ -37,7 +37,7 @@ const initDatepicker = () => {
     let today = new Date(date.getFullYear(), date.getMonth(), date.getDate())
 
     $('#from_datepicker').datepicker({ autoclose: true, endDate : new Date()})
-    $('#to_datepicker').datepicker({ autoclose: true, startDate : new Date()})
+    $('#to_datepicker').datepicker({ autoclose: true, endDate : new Date()})
     
     $('#from_datepicker').datepicker('setDate', today)
     $('#to_datepicker').datepicker('setDate', today)

@@ -47,7 +47,6 @@ exports.create = (req, res) => {
 
 exports.index = (req, res) => {
     const today = moment().startOf('day')
-    console.log(today.toDate(), moment(today).endOf('day').toDate())
     Search.find({ createdAt: {  $gte: today.toDate(), $lte: moment(today).endOf('day').toDate() } })
     .populate('area')
     .populate('symptoms')
