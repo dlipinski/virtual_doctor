@@ -46,26 +46,28 @@ exports.create_post = (req, res) => {
 }
 
 exports.update_get = (req, res) => {
-    Area.find()
-    .exec((err, areas) => {
+    Spec.find()
+    .exec((err, specs) => {
         if (err) console.log(err)
-        Symptom.findById(req.params.id)
-        .populate('area')
-        .exec((err, symptom) => {
+        Symptom.find()
+        .exec((err, symptoms) => {
             if (err) console.log(err)
-            res.render('symptom/update', { symptom, areas })
+            Disae.findById( req.params.id, (err, disae) => {
+                if (err) console.log(err)
+                res.render('disae/update', { disae, specs, symptoms })
+            })
         })
     })
 }
 
 exports.update_post = (req, res) => {
-    Symptom.findByIdAndUpdate(
+    Disae.findByIdAndUpdate(
         req.params.id,
         req.body,
         { new: true },
         (err, symptom) => {
                 if (err) console.log(err)
-                res.redirect('/symptom')
+                res.redirect('/disae')
             }
     )
 }

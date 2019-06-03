@@ -1,0 +1,37 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header 
+                    h3 Update Disae
+                .card-body
+                    form(action=`/disae/update/${disae.id}`, method='POST')
+                        .form-group
+                            label(for='name') Name
+                            input.form-control(name='name', value=disae.name)
+                            small.form-text.text-muted Fill name
+                        .form-group
+                            label(for='spec') Spec
+                            select.selectpicker.form-control(name='spec', data-live-search="true")
+                                each spec in specs
+                                        if spec.id == disae.spec.id
+                                            option(value=spec.id, selected)= spec.name
+                                        else
+                                            option(value=spec.id)= spec.name
+                            small.form-text.text-muted Select spec
+                        .form-group
+                            label(for='spec') Symptoms
+                            select.selectpicker.form-control(name='symptoms', multiple, data-live-search="true")
+                                each symptom in symptoms
+                                    if disae.symptoms.includes(symptom.id)
+                                        option(value=symptom.id, selected)= symptom.name
+                                    else
+                                        option(value=symptom.id)= symptom.name
+                            small.form-text.text-muted Select symptoms
+                        button.btn.btn-primary(type='submit') Update
+                
