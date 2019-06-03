@@ -64,7 +64,7 @@ const getDisaesBySymptom = symptomsIds => {
 
 const fillDisaes = disaes => {
     let disaeContainer = document.querySelector('#disaeContainer')
-    disaeContainer.innerHTML = '<h5> Disaes </h5>'
+    disaeContainer.innerHTML = ''
     disaes.forEach(disae => {
         console.log(disae)
         disaeContainer.innerHTML += disaeCard(disae)
@@ -73,9 +73,9 @@ const fillDisaes = disaes => {
 
 const disaeCard = disae => {
    return `
-   <div class='card' style='width: 25%'>
+   <div class='card' style='width: 30%; display: inline-block;margin: 10px;'>
     <div class='card-header'>
-        ${disae.name}
+        ${disae.name} (${disae.spec.name})
     </div>
     <div class='card-body'>
         ${disae.name}

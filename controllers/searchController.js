@@ -24,6 +24,7 @@ exports.symptoms_by_area = (req, res) => {
 
 exports.disaes_by_symptoms = (req, res) => {
     Disae.find({ symptom: { $in: [req.body.symptoms] }})
+    .populate('spec')
     .exec((err, disaes) => {
         if (err) console.log(err)
         res.send(JSON.stringify(disaes))

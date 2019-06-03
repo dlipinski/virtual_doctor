@@ -19,6 +19,7 @@ html(lang='pl')
                             thead
                                 tr
                                     th name
+                                    th descripton
                                     th spec
                                     th symptoms
                                     th 
@@ -26,6 +27,7 @@ html(lang='pl')
                                 each disae in disaes
                                     tr
                                         td= disae.name
+                                        td= disae.description
                                         td= disae.spec.name
                                         td
                                             each symptom in disae.symptoms

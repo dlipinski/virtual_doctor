@@ -28,6 +28,8 @@ exports.create_get = (req, res) => {
 exports.create_post = (req, res) => {
     let disae = new Disae()
     disae.name = req.body.name
+    disae.description = req.body.description
+    console.log(disae.description)
     Spec.findById(req.body.spec)
     .exec((err, spec) => {
         if (err) console.log(err)
@@ -75,7 +77,7 @@ exports.update_post = (req, res) => {
 exports.remove = (req, res) => {
     Disae.findOneAndRemove(
         { _id: req.params.id },
-        (err, symptom) => {
+        (err, disae) => {
             if (err) console.log(err)
             res.redirect(`/disae`)
         }

@@ -16,6 +16,10 @@ html(lang='pl')
                             input.form-control(name='name')
                             small.form-text.text-muted Fill name
                         .form-group
+                            label(for='description') Description
+                            textarea.form-control(name='description')
+                            small.form-text.text-muted Fill description
+                        .form-group
                             label(for='spec') Spec
                             select.selectpicker.form-control(name='spec', data-live-search="true")
                                 each spec in specs
