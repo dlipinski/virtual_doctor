@@ -16,12 +16,10 @@ exports.create_get = (req, res) => {
 exports.create_post = (req, res) => {
     let spec = new Spec()
     spec.name = req.body.name
-    try {
-		spec.save()
-		res.redirect('/spec')
-	} catch (err) {
-		console.log(err)
-	}
+	spec.save((err) => {
+        if (err) console.log(err)
+        res.redirect('/spec')
+    })	
 }
 
 exports.update_get = (req, res) => {

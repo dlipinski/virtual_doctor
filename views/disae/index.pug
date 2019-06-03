@@ -17,25 +17,26 @@ html(lang='pl')
                     if disaes.length > 0
                         .form-group
                             input.form-control#search(placeholder='Search')
-                        table.table.table-hover.border
-                            thead
-                                tr
-                                    th name
-                                    th descripton
-                                    th spec
-                                    th symptoms
-                                    th 
-                            tbody
-                                each disae in disaes
+                        .table-responsive
+                            table.table.table-hover.border
+                                thead
                                     tr
-                                        td= disae.name
-                                        td= disae.description
-                                        td= disae.spec.name
-                                        td= disae.symptoms.map(s => s.name).join(',')
-                                        td.text-right
-                                            a.btn.btn-primary.mr-3(href='/disae/update/'+disae.id) update
-                                            form.my-form(action='/disae/remove/'+disae.id, method='POST')
-                                                button.btn.btn-danger(type='submit') remove
+                                        th name
+                                        th descripton
+                                        th spec
+                                        th symptoms
+                                        th 
+                                tbody
+                                    each disae in disaes
+                                        tr
+                                            td= disae.name
+                                            td= disae.description
+                                            td= disae.spec.name
+                                            td= disae.symptoms.map(s => s.name).join(',')
+                                            td.text-right
+                                                a.btn.btn-primary.mr-3(href='/disae/update/'+disae.id) update
+                                                form.my-form(action='/disae/remove/'+disae.id, method='POST')
+                                                    button.btn.btn-danger(type='submit') remove
                     else
                         h6.text-center.text-muted No disaes to show
 

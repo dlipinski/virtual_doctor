@@ -5,7 +5,9 @@ require('./symptomModel')
 
 const SearchSchema = mongoose.Schema({
     area: { type: mongoose.Schema.Types.ObjectId, ref: 'Area' },
-    symptom: { type: mongoose.Schema.Types.ObjectId, ref: 'Symptom' }
+    symptoms: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Symptom' }]
 })
+
+SearchSchema.set('timestamps', true)
 
 module.exports = mongoose.model('Search', SearchSchema)

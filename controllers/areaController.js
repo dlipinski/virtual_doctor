@@ -16,12 +16,10 @@ exports.create_get = (req, res) => {
 exports.create_post = (req, res) => {
     let area = new Area()
     area.name = req.body.name
-    try {
-		area.save()
-		res.redirect('/area')
-	} catch (err) {
-		console.log(err)
-	}
+    area.save((err) => {
+        if (err) console.log(err)
+        res.redirect('/area')
+    })
 }
 
 exports.update_get = (req, res) => {

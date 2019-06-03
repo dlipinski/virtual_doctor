@@ -17,19 +17,20 @@ html(lang='pl')
                     if specs.length > 0
                         .form-group
                             input.form-control#search(placeholder='Search')
-                        table.table.table-hover.border
-                            thead
-                                tr
-                                    th name
-                                    th 
-                            tbody
-                                each spec in specs
+                        .table-responsive
+                            table.table.table-hover.border
+                                thead
                                     tr
-                                        td= spec.name
-                                        td.text-right
-                                            a.btn.btn-primary.mr-3(href='/spec/update/'+spec.id) update
-                                            form.my-form(action='/spec/remove/'+spec.id, method='POST')
-                                                button.btn.btn-danger(type='submit') remove
+                                        th name
+                                        th 
+                                tbody
+                                    each spec in specs
+                                        tr
+                                            td= spec.name
+                                            td.text-right
+                                                a.btn.btn-primary.mr-3(href='/spec/update/'+spec.id) update
+                                                form.my-form(action='/spec/remove/'+spec.id, method='POST')
+                                                    button.btn.btn-danger(type='submit') remove
                     else
                         h6.text-center.text-muted No specs to show
 

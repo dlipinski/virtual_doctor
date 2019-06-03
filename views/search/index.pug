@@ -2,33 +2,45 @@ doctype html
 html(lang='pl')
     head
         include ../partial/head.pug
+        link(rel='stylesheet', href='/bootstrap-datepicker3.min.css')
+        script(src='/bootstrap-datepicker.min.js')
     body
         include ../partial/header.pug
-        script(src='searchScript.js')
+
         main.container
             .card
                 .card-header
-                    h3 Doctor
+                    .row
+                        .col
+                            h3 Searches
                 .card-body
-                    .form-group
-                            label(for='area') Area
-                            select#area.selectpicker.form-control(name='area')
-                                option(value=0) Select
-                                each area in areas
-                                    option(value=area.id)= area.name
-                    .form-group#symptomsGroup
-                            label(for='symptoms') Symptoms
-                            select#symptoms.selectpicker.form-control(name='symptoms', multiple)
-                                each area in areas
-                                    option(value=area.id)= area.name
-                .card-footer.p-0
-                    button.btn.btn-primary.btn-block#searchButton Search
-                    
-            .card.mt-3#disaesCard
-                .card-header.text-center 
-                    h5 Disaes
-                .card-body#disaeContainer
-
-
-
+                    if searches.length > 0
+                        .form-group
+                            .row
+                                .col
+                                    label(for='from') From
+                                    input#from_datepicker.form-control.text-center(data-provide='datepicker', data-date-format="dd/mm/yyyy")
+                                .col
+                                    label(for='to') To
+                                    input#to_datepicker.form-control.text-center(data-provide='datepicker',  data-date-format="dd/mm/yyyy")
+                        .table-responsive
+                            table#searchesTable.table.table-hover.border
+                                thead
+                                    tr
+                                        th area
+                                        th symptoms
+                                        th date
+                                        th
+                                tbody
+                                    each search in searches
+                                        tr
+                                            td=search.area.name
+                                            td=search.symptoms.map(s => s.name).join(',')
+                                            td=search._id.getTimestamp().toLocaleString()
+                                            td
+                                                form.my-form(action='/search/remove/'+search.id, method='POST')
+                                                        button.btn.btn-danger(type='submit') remove
+                               
+                    else
+                        h6.text-center.text-muted No searches to show
 

@@ -37,13 +37,11 @@ exports.create_post = (req, res) => {
         disae.spec = spec
         Symptom.find({ _id : { $in: req.body.symptoms } })
         .exec((err, symptoms) => {
-            try {
-                disae.symptoms = symptoms
-                disae.save()
+            disae.symptoms = symptoms
+            disae.save((err) => {
+                if (err) console.log(err)
                 res.redirect('/disae')
-            } catch (err) {
-                console.log(err)
-            }
+            })
         })
     })   
 }

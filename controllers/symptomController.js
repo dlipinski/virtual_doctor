@@ -26,12 +26,10 @@ exports.create_post = (req, res) => {
     .exec((err, area) => {
         if (err) console.log(err)
         symptom.area = area
-        try {
-            symptom.save()
+        symptom.save((err) => {
+            if (err) console.log(err)
             res.redirect('/symptom')
-        } catch (err) {
-            console.log(err)
-        }
+        })
     })
    
 }

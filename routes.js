@@ -10,9 +10,13 @@ const disaeController = require('./controllers/disaeController')
 module.exports = () => {
 
     /* -- SEARCH -- */
-    router.get('/', searchController.index)
-    router.get('/symptomsByArea/:id', searchController.symptoms_by_area)
-    router.get('/disaesBySymptoms', searchController.disaes_by_symptoms)
+    router.get('/', searchController.client_index)
+    router.get('/search', searchController.index)
+    router.get('/search/searchesByDate/:dates', searchController.list_by_date)
+    router.post('/search/create', searchController.create)
+    router.post('/search/remove/:id', searchController.remove)
+    router.get('/search/symptomsByArea/:id', searchController.symptoms_by_area)
+    router.get('/search/disaesBySymptoms/:ids', searchController.disaes_by_symptoms)
 
     /* --- AREA --- */
     /* list */

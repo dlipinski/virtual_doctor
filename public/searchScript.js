@@ -29,7 +29,7 @@ const getSymptomsByArea = areaId => {
             fillSymptoms(JSON.parse(xhr.responseText))
         }
     })
-    xhr.open('GET', `/symptomsByArea/${areaId}` , true)
+    xhr.open('GET', `/search/symptomsByArea/${areaId}` , true)
     xhr.send()
 }
 
@@ -45,14 +45,18 @@ const fillSymptoms = symptoms => {
     document.querySelector('#symptomsGroup').style['display'] = 'block'
     $('#symptoms').selectpicker('refresh')
 }
+
 const initSearchButton = () => {
     let searchButton = document.querySelector('#searchButton')
+    let areaPicker = document.querySelector('#area')
     let symptomsPicker = document.querySelector('#symptoms')
     searchButton.addEventListener('click', () => {
         document.querySelector('#disaesCard').style['display'] = 'block'
+        sendStatistic([...areaPicker.querySelectorAll('option')].filter(o => o.selected)[0].value, [...symptomsPicker.querySelectorAll('option')].filter(o => o.selected).map(o => o.value))
         getDisaesBySymptoms([...symptomsPicker.querySelectorAll('option')].filter(o => o.selected).map(o => o.value))
     })
 }
+
 const initSymptomsRestCall = () => {
     let symptomsPicker = document.querySelector('#symptoms')
     let searchButton = document.querySelector('#searchButton')
@@ -65,17 +69,28 @@ const initSymptomsRestCall = () => {
     })
 }
 
-const getDisaesBySymptoms = symptomsIds => {
+const sendStatistic = (area, symptoms) => {
+    let xhr = new XMLHttpRequest()
+    xhr.addEventListener('readystatechange', () => {
+        if (xhr.readyState == 4) {
+            console.log('Statistic send', area, symptoms)
+        }
+    })
+    xhr.open('POST', `/search/create` , true)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.send(JSON.stringify({ area, symptoms }))
+}
+
+const getDisaesBySymptoms = symptomsIds => { 
     let xhr = new XMLHttpRequest()
     xhr.addEventListener('readystatechange', () => {
         if (xhr.readyState == 4) {
             fillDisaes(JSON.parse(xhr.responseText))
         }
     })
-    xhr.open('GET', `/disaesBySymptoms` , true)
-    xhr.send(JSON.stringify({ symptoms: symptomsIds}))
+    xhr.open('GET', `/search/disaesBySymptoms/${symptomsIds.join(',')}` , true)
+    xhr.send()
 }
-
 
 const fillDisaes = disaes => {
     let disaeContainer = document.querySelector('#disaeContainer')
