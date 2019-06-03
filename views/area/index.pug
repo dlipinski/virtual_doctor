@@ -4,6 +4,7 @@ html(lang='pl')
         include ../partial/head.pug
     body
         include ../partial/header.pug
+        
 
         main.container
             .card
@@ -15,6 +16,8 @@ html(lang='pl')
                             a.btn.btn-primary(href='/area/create') New area
                 .card-body
                     if areas.length > 0
+                        .form-group
+                                input.form-control#search(placeholder='Search')
                         table.table.table-hover.border
                             thead
                                 tr

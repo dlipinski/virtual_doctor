@@ -29,6 +29,7 @@ exports.create_post = (req, res) => {
     let disae = new Disae()
     disae.name = req.body.name
     disae.description = req.body.description
+    disae.propability = req.body.propability
     console.log(disae.description)
     Spec.findById(req.body.spec)
     .exec((err, spec) => {

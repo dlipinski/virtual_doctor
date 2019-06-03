@@ -20,6 +20,22 @@ html(lang='pl')
                             textarea.form-control(name='desciption', value=disae.desciption)
                             small.form-text.text-muted Fill desciption
                         .form-group
+                            label(for='propability') Propability
+                            select.selectpicker.form-control(name='propability')
+                                if disae.propability == 0
+                                    option(value='0', selected) Small
+                                else
+                                    option(value='0') Small
+                                if disae.propability == 1
+                                    option(value='1', selected) Medium
+                                else
+                                    option(value='1') Medium
+                                if disae.propability == 2
+                                    option(value='2', selected) Large
+                                else
+                                    option(value='2') Large
+                            small.form-text.text-muted Select propability
+                        .form-group
                             label(for='spec') Spec
                             select.selectpicker.form-control(name='spec', data-live-search="true")
                                 each spec in specs

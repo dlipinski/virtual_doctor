@@ -14,7 +14,10 @@ const initAreaRestCall = () => {
     disaeContainer.innerHTML = ''
     let areaPicker = document.querySelector('#area')
     areaPicker.addEventListener('change', () => {
-        getSymptomsByArea([...areaPicker.querySelectorAll('option')].filter(o => o.selected)[0].value)
+        let areaId = [...areaPicker.querySelectorAll('option')].filter(o => o.selected)[0].value
+        console.log(areaId)
+        if (areaId !== '0')
+            getSymptomsByArea(areaId)
     })
    
 }

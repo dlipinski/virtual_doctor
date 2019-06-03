@@ -13,6 +13,7 @@ html(lang='pl')
                     .form-group
                             label(for='area') Area
                             select#area.selectpicker.form-control(name='area')
+                                option(value=0) Select
                                 each area in areas
                                     option(value=area.id)= area.name
                             small.form-text.text-muted Select area
