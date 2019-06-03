@@ -78,7 +78,7 @@ const disaeCard = disae => {
         ${disae.name} (${disae.spec.name})
     </div>
     <div class='card-body'>
-        ${disae.name}
+        ${disae.description}
     </div>
    </div>
    `
