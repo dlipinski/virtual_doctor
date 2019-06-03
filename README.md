@@ -4,9 +4,7 @@
 Należy zainstalować:
 1. NodeJS
 2. npm
-3. mongodb
-
-Następnie trzeba uruchomić mongo (w necie jest napisane co i jak)
+3. mongodb (i uruchomić : https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/) (inny system tez mozna sobie wybrac)
 
 Potem:
 ```
