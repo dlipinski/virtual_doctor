@@ -10,7 +10,7 @@ html(lang='pl')
                 .card-header 
                     h3 Update symptom
                 .card-body
-                    form(action='/symptom/update', method='POST')
+                    form(action=`/symptom/update/${symptom.id}`, method='POST')
                         .form-group
                             label(for='name') Name
                             input.form-control(name='name', value=symptom.name)

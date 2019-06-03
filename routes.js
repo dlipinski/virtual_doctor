@@ -12,6 +12,7 @@ module.exports = () => {
     /* -- SEARCH -- */
     router.get('/', searchController.index)
     router.get('/symptomsByArea/:id', searchController.symptoms_by_area)
+    router.get('/disaesBySymptoms', searchController.disaes_by_symptoms)
 
     /* --- AREA --- */
     /* list */

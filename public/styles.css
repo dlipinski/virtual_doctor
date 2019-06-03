@@ -4,3 +4,9 @@ main.container {
 .my-form {
     float: right;
 }
+#symptomsGroup{
+    display: none;
+}
+#disaeContainer {
+    padding:10px;
+}

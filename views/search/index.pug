@@ -16,6 +16,14 @@ html(lang='pl')
                                 each area in areas
                                     option(value=area.id)= area.name
                             small.form-text.text-muted Select area
+                    .form-group#symptomsGroup
+                            label(for='symptoms') Symptoms
+                            select#symptoms.selectpicker.form-control(name='symptoms', multiple)
+                                each area in areas
+                                    option(value=area.id)= area.name
+                            small.form-text.text-muted Select symptoms
+                    #disaeContainer
+
 
 
 
