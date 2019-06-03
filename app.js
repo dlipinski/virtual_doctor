@@ -11,7 +11,7 @@ app.use(express.static('public'))
 app.use('/', routes())
 
 mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true })
-//mongodb+srv://boxranking:brdkoppo@boxranking-cluster-1cmvm.gcp.mongodb.net/test?retryWrites=true
+
 app.listen(3000, () => {
     console.log('App listening on port 3000')
     console.log('Press Ctrl+C to quit.')
