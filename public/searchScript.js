@@ -7,6 +7,7 @@ document.addEventListener('readystatechange', () => {
 const initApp = () => {
     initAreaRestCall()
     initSymptomsRestCall()
+    initSearchButton()
 }
 
 const initAreaRestCall = () => {
@@ -15,7 +16,6 @@ const initAreaRestCall = () => {
     let areaPicker = document.querySelector('#area')
     areaPicker.addEventListener('change', () => {
         let areaId = [...areaPicker.querySelectorAll('option')].filter(o => o.selected)[0].value
-        console.log(areaId)
         if (areaId !== '0')
             getSymptomsByArea(areaId)
     })
@@ -45,15 +45,27 @@ const fillSymptoms = symptoms => {
     document.querySelector('#symptomsGroup').style['display'] = 'block'
     $('#symptoms').selectpicker('refresh')
 }
-
+const initSearchButton = () => {
+    let searchButton = document.querySelector('#searchButton')
+    let symptomsPicker = document.querySelector('#symptoms')
+    searchButton.addEventListener('click', () => {
+        document.querySelector('#disaesCard').style['display'] = 'block'
+        getDisaesBySymptoms([...symptomsPicker.querySelectorAll('option')].filter(o => o.selected).map(o => o.value))
+    })
+}
 const initSymptomsRestCall = () => {
     let symptomsPicker = document.querySelector('#symptoms')
+    let searchButton = document.querySelector('#searchButton')
     symptomsPicker.addEventListener('change', () => {
-        getDisaesBySymptom([...symptomsPicker.querySelectorAll('option')].filter(o => o.selected)[0].value)
+        if ([...symptomsPicker.querySelectorAll('option')].filter(o => o.selected).length > 0) {
+            searchButton.style['display'] = 'block'
+        } else {
+            searchButton.style['display'] = 'none'
+        }
     })
 }
 
-const getDisaesBySymptom = symptomsIds => {
+const getDisaesBySymptoms = symptomsIds => {
     let xhr = new XMLHttpRequest()
     xhr.addEventListener('readystatechange', () => {
         if (xhr.readyState == 4) {
@@ -69,7 +81,6 @@ const fillDisaes = disaes => {
     let disaeContainer = document.querySelector('#disaeContainer')
     disaeContainer.innerHTML = ''
     disaes.forEach(disae => {
-        console.log(disae)
         disaeContainer.innerHTML += disaeCard(disae)
     })
 }

@@ -11,3 +11,9 @@ main.container {
     padding:10px;
     text-align: center;
 }
+#searchButton{
+    display: none;
+}
+#disaesCard{
+    display: none;
+}
