@@ -1,0 +1,33 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header
+                    .row
+                        .col
+                            h3 Areas
+                        .col.text-right
+                            a.btn.btn-primary(href='/area/create') New area
+                .card-body
+                    if areas.length > 0
+                        table.table.table-hover.border
+                            thead
+                                tr
+                                    th name
+                                    th 
+                            tbody
+                                each area in areas
+                                    tr
+                                        td= area.name
+                                        td.text-right
+                                            a.btn.btn-primary.mr-3(href='/area/update/'+area.id) update
+                                            form.my-form(action='/area/remove/'+area.id, method='POST')
+                                                button.btn.btn-danger(type='submit') remove
+                    else
+                        h6.text-center.text-muted No areas to show
+

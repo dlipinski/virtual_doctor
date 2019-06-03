@@ -1,0 +1,26 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header 
+                    h3 Update symptom
+                .card-body
+                    form(action='/symptom/update', method='POST')
+                        .form-group
+                            label(for='name') Name
+                            input.form-control(name='name', value=symptom.name)
+                            small.form-text.text-muted Fill name
+                            label(for='area')
+                            select.selectpicker.form-control(name='area')
+                                each area in areas
+                                    if area.id == symptom.area.id
+                                        option(value=area.id, selected)= area.name
+                                    else
+                                        option(value=area.id)= area.name
+                        button.btn.btn-primary(type='submit') Update
+                

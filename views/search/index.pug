@@ -1,0 +1,21 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+        script(src='searchScript.js')
+        main.container
+            .card
+                .card-header
+                    h3 Doctor
+                .card-body
+                    .form-group
+                            label(for='area') Area
+                            select#area.selectpicker.form-control(name='area')
+                                each area in areas
+                                    option(value=area.id)= area.name
+                            small.form-text.text-muted Select area
+
+
+

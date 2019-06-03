@@ -1,0 +1,39 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header
+                    .row
+                        .col
+                            h3 Disaes
+                        .col.text-right
+                            a.btn.btn-primary(href='/disae/create') New disae
+                .card-body
+                    if disaes.length > 0
+                        table.table.table-hover.border
+                            thead
+                                tr
+                                    th name
+                                    th spec
+                                    th symptoms
+                                    th 
+                            tbody
+                                each disae in disaes
+                                    tr
+                                        td= disae.name
+                                        td= disae.spec.name
+                                        td
+                                            each symptom in disae.symptoms
+                                                span= symptom.name + ','
+                                        td.text-right
+                                            a.btn.btn-primary.mr-3(href='/disae/update/'+disae.id) update
+                                            form.my-form(action='/disae/remove/'+disae.id, method='POST')
+                                                button.btn.btn-danger(type='submit') remove
+                    else
+                        h6.text-center.text-muted No disaes to show
+

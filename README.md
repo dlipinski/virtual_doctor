@@ -6,6 +6,8 @@ Należy zainstalować:
 2. npm
 3. mongodb
 
+Następnie trzeba uruchomić mongo (w necie jest napisane co i jak)
+
 Potem:
 ```
 git clone https://github.com/dlipinski/licencjat.git

@@ -1,0 +1,37 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header
+                    .row
+                        .col
+                            h3 Symptoms
+                        .col.text-right
+                            a.btn.btn-primary(href='/symptom/create') New symptom
+                .card-body
+                    if symptoms.length > 0
+                        table.table.table-hover.border
+                            thead
+                                tr
+                                    th name
+                                    th area
+                                    th
+                            tbody
+                                each symptom in symptoms
+                                    tr
+                                        td= symptom.name
+                                        td= symptom.area.name
+                                        td.text-right
+                                            a.btn.btn-primary.mr-3(href='/symptom/update/'+symptom.id) update
+                                            form.my-form(action='/symptom/remove/'+symptom.id, method='POST')
+                                                button.btn.btn-danger(type='submit') remove
+                    else
+                        h6.text-center.text-muted No symptoms to show
+
+
+

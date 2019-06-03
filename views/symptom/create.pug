@@ -1,0 +1,25 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header 
+                    h3 Create symptom
+                .card-body
+                    form(action='/symptom/create', method='POST')
+                        .form-group
+                            label(for='name') Name
+                            input.form-control(name='name')
+                            small.form-text.text-muted Fill name
+                        .form-group
+                            label(for='area') Area
+                            select.selectpicker.form-control(name='area',  data-live-search="true")
+                                each area in areas
+                                    option(value=area.id)= area.name
+                            small.form-text.text-muted Select Area
+                        button.btn.btn-primary(type='submit') Create
+                

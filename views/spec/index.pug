@@ -1,0 +1,35 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header
+                    .row
+                        .col
+                            h3 Specs
+                        .col.text-right
+                            a.btn.btn-primary(href='/spec/create') New spec
+                .card-body
+                    if specs.length > 0
+                        table.table.table-hover.border
+                            thead
+                                tr
+                                    th name
+                                    th 
+                            tbody
+                                each spec in specs
+                                    tr
+                                        td= spec.name
+                                        td.text-right
+                                            a.btn.btn-primary.mr-3(href='/spec/update/'+spec.id) update
+                                            form.my-form(action='/spec/remove/'+spec.id, method='POST')
+                                                button.btn.btn-danger(type='submit') remove
+                    else
+                        h6.text-center.text-muted No specs to show
+
+
+

@@ -1,0 +1,31 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header 
+                    h3 Create Disae
+                .card-body
+                    form(action='/disae/create', method='POST')
+                        .form-group
+                            label(for='name') Name
+                            input.form-control(name='name')
+                            small.form-text.text-muted Fill name
+                        .form-group
+                            label(for='spec') Spec
+                            select.selectpicker.form-control(name='spec', data-live-search="true")
+                                each spec in specs
+                                    option(value=spec.id)= spec.name
+                            small.form-text.text-muted Select spec
+                        .form-group
+                            label(for='spec') Symptoms
+                            select.selectpicker.form-control(name='symptoms', multiple, data-live-search="true")
+                                each symptom in symptoms
+                                    option(value=symptom.id)= symptom.name
+                            small.form-text.text-muted Select symptoms
+                        button.btn.btn-primary(type='submit') Create
+                
