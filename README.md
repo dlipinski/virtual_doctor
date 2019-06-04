@@ -13,7 +13,12 @@ cd licencjat
 npm install
 ```
 
-Teraz juź moźna uruchomić:
+Teraz juź moźna zaseedowac:
+```
+node seed/seed.js
+```
+
+i uruchomić:
 ```
 npm start
 ```
