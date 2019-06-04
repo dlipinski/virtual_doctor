@@ -1,5 +1,5 @@
 header
-    nav.navbar.navbar-dark.navbar-expand-lg.bg-dark
+    nav.navbar.navbar-dark.navbar-expand-md.bg-dark
         .container
             a.navbar-brand(href='/').p-0
                 Web Doctor
@@ -18,4 +18,10 @@ header
                     li.nav-item.active
                         a.nav-link(href='/search') Search
                     li.nav-item.active
-                        a.nav-link(href='/search') Search
+                        a.nav-link(href='/question') Question
+                .form-inline.mt-2.mt-md-0
+                    ul.navbar-nav.mr-auto
+                        li.nav-item
+                            a.nav-link.text-light(href='signin') Sign in
+                        li.nav-item
+                            a.btn.btn-outline-light(href='/signup') Sign up

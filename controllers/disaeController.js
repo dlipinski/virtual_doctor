@@ -66,7 +66,7 @@ exports.update_post = (req, res) => {
         req.params.id,
         req.body,
         { new: true },
-        (err, symptom) => {
+        (err, disae) => {
                 if (err) console.log(err)
                 res.redirect('/disae')
             }
@@ -74,7 +74,10 @@ exports.update_post = (req, res) => {
 }
 
 exports.show = (req, res) => {
-    Disae.findById( req.params.id, (err, disae) => {
+    console.log(req.params.id)
+    Disae.findOne({ _id: req.params.id }) 
+    .populate('questions')
+    .exec((err, disae) => {
         if (err) console.log(err)
         res.render('disae/show', { disae })
     })

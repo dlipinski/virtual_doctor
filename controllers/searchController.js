@@ -45,7 +45,7 @@ exports.create = (req, res) => {
  
 }
 
-exports.index = (req, res) => {
+exports.list = (req, res) => {
     const today = moment().startOf('day')
     Search.find({ createdAt: {  $gte: today.toDate(), $lte: moment(today).endOf('day').toDate() } })
     .populate('area')

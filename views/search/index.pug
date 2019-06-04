@@ -36,7 +36,7 @@ html(lang='pl')
                                         tr
                                             td=search.area.name
                                             td=search.symptoms.map(s => s.name).join(',')
-                                            td=search._id.getTimestamp().toLocaleString()
+                                            td=search.createdAt.toLocaleString()
                                             td
                                                 form.my-form(action='/search/remove/'+search.id, method='POST')
                                                     button.btn.btn-danger.btn-sm(type='submit') 

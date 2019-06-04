@@ -2,6 +2,8 @@ const router = require('express').Router()
 
 const searchController = require('./controllers/searchController')
 
+const questionController = require('./controllers/questionController')
+
 const areaController = require('./controllers/areaController')
 const specController = require('./controllers/specController')
 const symptomController = require('./controllers/symptomController')
@@ -9,14 +11,21 @@ const disaeController = require('./controllers/disaeController')
 
 module.exports = () => {
 
-    /* -- SEARCH -- */
+    /* --- SEARCH --- */
     router.get('/', searchController.client_index)
-    router.get('/search', searchController.index)
+    router.get('/search', searchController.list)
     router.get('/search/searchesByDate/:dates', searchController.list_by_date)
     router.post('/search/create', searchController.create)
     router.post('/search/remove/:id', searchController.remove)
     router.get('/search/symptomsByArea/:id', searchController.symptoms_by_area)
     router.get('/search/disaesBySymptoms/:ids', searchController.disaes_by_symptoms)
+
+    /* --- QUESTION --- */
+    router.get('/question', questionController.list)
+    router.get('/question/show/:id', questionController.show)
+    router.get('/question/create/:disaeId', questionController.create_get)
+    router.post('/question/create', questionController.create_post)
+    router.post('/question/remove/:id', questionController.remove)
 
     /* --- AREA --- */
     /* list */

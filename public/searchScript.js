@@ -9,15 +9,21 @@ const initApp = () => {
     initSymptomsRestCall()
     initSearchButton()
 }
-
+/* icony ciala: https://www.flaticon.com/packs/human-body-outline*/
 const initAreaRestCall = () => {
-    let disaeContainer = document.querySelector('#disaeContainer')
-    disaeContainer.innerHTML = ''
     let areaPicker = document.querySelector('#area')
-    areaPicker.addEventListener('change', () => {
-        let areaId = [...areaPicker.querySelectorAll('option')].filter(o => o.selected)[0].value
-        if (areaId !== '0')
+    let areaButtons = document.querySelectorAll('.area-button')
+    areaButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            let areaId = button.id
+            if([...areaButtons].filter(b => b.classList.contains('active'))[0] !== undefined) {
+                ;[...areaButtons].filter(b => b.classList.contains('active'))[0].classList.remove('active')
+            } 
+            button.classList.add('active')
+            ;[...areaPicker.querySelectorAll('option')].filter(o => o.selected)[0].removeAttribute('selected')
+            ;[...areaPicker.querySelectorAll('option')].filter(o => o.value === areaId)[0].setAttribute('selected', 'true')
             getSymptomsByArea(areaId)
+        })
     })
    
 }
@@ -95,20 +101,26 @@ const getDisaesBySymptoms = symptomsIds => {
 const fillDisaes = disaes => {
     let disaeContainer = document.querySelector('#disaeContainer')
     disaeContainer.innerHTML = ''
-    disaes.forEach(disae => {
-        disaeContainer.innerHTML += disaeCard(disae)
-    })
+    if  (disaes.length > 0) {
+        disaes.forEach(disae => {
+            disaeContainer.innerHTML += disaeCard(disae)
+        })
+    } else {
+        disaeContainer.innerHTML = '<h6 class="text-center text-muted mt-3 mb-3">  No disaes to show </h6>'
+    }
 }
 
 const disaeCard = disae => {
    return `
-   <div class='card' style='width: 30%; display: inline-block;margin: 10px;'>
-    <div class='card-header'>
-        ${disae.name} (${disae.spec.name})
-    </div>
-    <div class='card-body'>
-        ${disae.description}
-    </div>
-   </div>
+    <a href='/disae/show/${disae._id}'>
+        <div class='card' style='width: 30%; display: inline-block;margin: 10px;'>
+            <div class='card-header'>
+                ${disae.name} (${disae.spec.name})
+            </div>
+            <div class='card-body'>
+                ${disae.description}
+            </div>
+        </div>
+    </a>
    `
 }

@@ -1,0 +1,36 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header
+                    h5 Question
+                .card-body
+                    h3=question.name
+                    span=question.content
+            .card.mt-3
+                .card-body
+                    a(href='user/show/asd')
+                        h5 Nazwa obecnego uzytkownika
+                    form(action='/answer/create', method='POST')
+                        .form-group
+                            input.form-control(name='disae_id', readonly, value=question._id, hidden)
+                        .form-group
+                            textarea.form-control(name='content')
+                        button.btn.btn-primary(type='submit') Answer
+            .card.mt-3
+                .card-header= `Answers (${ question.answers.length })`
+                .card-body
+                    if  question.answers.length > 0
+                        each answer in question.answers
+                            .card.mt-2
+                                .card-header
+                                     a(href='user/show/asd') nazwa uzytkownika
+                                .card-body= answer.content
+                    else
+                        h6.text-center.text-muted No answers to show
+                

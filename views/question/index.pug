@@ -1,0 +1,42 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+        link(rel='stylesheet', href='/bootstrap-datepicker3.min.css')
+        script(src='/bootstrap-datepicker.min.js')
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header
+                    .row
+                        .col
+                            h3 Questions
+                .card-body
+                    if questions.length > 0
+                        .form-group
+                            input.form-control#search(placeholder='Search')
+                        .table-responsive
+                            table.table.table-hover.border
+                                thead
+                                    tr
+                                        th name
+                                        th content
+                                        th answers
+                                        th date
+                                        th
+                                tbody
+                                    each question in questions
+                                        tr
+                                            td=question.name
+                                            td=question.content
+                                            td=question.answers.length
+                                            td=question.createdAt.toLocaleString()
+                                            td
+                                                form.my-form(action=`/question/remove/${question._id}`, method='POST')
+                                                    button.btn.btn-danger.btn-sm(type='submit') 
+                                                        span.icon-bin
+                    else
+                        h6.text-center.text-muted No questions to show
+

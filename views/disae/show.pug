@@ -7,8 +7,23 @@ html(lang='pl')
 
         main.container
             .card
-                .card-header 
-                    h3=disae.name
                 .card-body
+                    h1=disae.name
                     h5=disae.description
+            .card.mt-3
+                .card-header 
+                    .row
+                        .col
+                            h3= `Questions (${ disae.questions.length })`
+                        .col.text-right
+                            a.btn.btn-primary(href=`/question/create/${ disae._id }`) Ask
+                .card-body
+                    each question in disae.questions
+                        .card.mt-2
+                            .card-header
+                                a(href='user/show/asd') nazwa uzytkownika
+                            a.text-dark(href=`/question/show/${ question._id }`)
+                                .card-body
+                                    h5=question.name
+                                    span=question.content
                 

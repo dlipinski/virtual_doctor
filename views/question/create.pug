@@ -1,0 +1,26 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header 
+                    h3 Ask a question
+                .card-body
+                    form(action='/question/create', method='POST')
+                        .form-group
+                            label(for='disae_name') Disae
+                            input.form-control(name='disae_name', readonly, value=disae.name)
+                            input.form-control(name='disae_id', readonly, value=disae._id, hidden)
+                        .form-group
+                            label(for='name') Title
+                            input.form-control(name='name')
+                        .form-group
+                            label(for='content') Content
+                            textarea.form-control(name='content')
+
+                        button.btn.btn-primary(type='submit') Ask
+                
