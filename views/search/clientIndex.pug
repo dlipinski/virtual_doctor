@@ -7,30 +7,29 @@ html(lang='pl')
         include ../partial/header.pug
         main.container
             .card
-                .card-header
-                    h3 Doctor
                 .card-body
                     .form-group.text-center
+                        each area in areas
+                            button.btn.btn-outline-secondary.mr-3.area-button(id=area._id)
+                                img(src=`/${area.name}.svg`)
+                                span=area.name
+                        select#area(name='area', hidden)
                             each area in areas
-                                button.btn.btn-outline-secondary.mr-3.area-button(id=area._id)
-                                    img(src=`/${area.name}.svg`)
-                                    span=area.name
-                            select#area.form-control(name='area', hidden)
-                                each area in areas
-                                    option(value=area.id)= area.name
-                                    
+                                option(value=area.id)= area.name
+                    .card
+                        .card-body#symptoms_buttons
+                            h5.text-muted.text-center.mt-1 Select area
                     .form-group#symptomsGroup
-                            label(for='symptoms') Symptoms
-                            select#symptoms.selectpicker.form-control(name='symptoms', multiple)
-                                each area in areas
-                                    option(value=area.id)= area.name
-                .card-footer.p-0
-                    button.btn.btn-primary.btn-block#searchButton Search
-                    
+                            select#symptoms(name='symptoms', multiple, hidden)
+                .card-footer.p-0.bg-light
+                    button#searchButton.btn.btn-primary.btn-block.text-center.rounded-bottom(disabled)
+                        span.mr-1.icon-search
+                        span Search
             .card.mt-3#disaesCard
                 .card-header.text-center 
                     h5 Disaes
                 .card-body#disaeContainer
+
 
 
 

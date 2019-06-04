@@ -6,15 +6,16 @@ document.addEventListener('readystatechange', () => {
 
 const initApp = () => {
     initAreaRestCall()
-    initSymptomsRestCall()
-    initSearchButton()
 }
+
+
 /* icony ciala: https://www.flaticon.com/packs/human-body-outline*/
 const initAreaRestCall = () => {
     let areaPicker = document.querySelector('#area')
     let areaButtons = document.querySelectorAll('.area-button')
     areaButtons.forEach(button => {
         button.addEventListener('click', () => {
+            document.querySelector('#disaesCard').style['display'] = 'none'
             let areaId = button.id
             if([...areaButtons].filter(b => b.classList.contains('active'))[0] !== undefined) {
                 ;[...areaButtons].filter(b => b.classList.contains('active'))[0].classList.remove('active')
@@ -41,39 +42,48 @@ const getSymptomsByArea = areaId => {
 
 const fillSymptoms = symptoms => {
     let symptomsPicker = document.querySelector('#symptoms')
+    let areaPicker = document.querySelector('#area')
+    let searchbutton = document.querySelector('#searchButton')
+    let symptomButtonContainer = document.querySelector('#symptoms_buttons')
+    symptomButtonContainer.innerHTML = ''
     symptomsPicker.innerHTML = ''
+    searchbutton.addEventListener('click', () => {
+        document.querySelector('#disaesCard').style['display'] = 'block'
+        sendStatistic([...areaPicker.querySelectorAll('option')].filter(o => o.selected)[0].value, [...symptomsPicker.querySelectorAll('option')].filter(o => o.selected).map(o => o.value))
+        getDisaesBySymptoms([...symptomsPicker.querySelectorAll('option')].filter(o => o.selected).map(o => o.value))
+    })
     symptoms.forEach(symptom => {
         let option = document.createElement('option')
         option.innerHTML = symptom.name
         option.value = symptom._id
         symptomsPicker.appendChild(option)
+        let button = document.createElement('button')
+        button.classList.add('btn','btn-outline-info', 'mr-1')
+        button.innerHTML = symptom.name
+        button.addEventListener('click', () => {
+            if (button.classList.contains('active')) {
+                option.removeAttribute('selected')
+                button.classList.remove('active')
+            } else {
+                option.setAttribute('selected', 'true')
+                button.classList.add('active')
+            }
+            if([...symptomsPicker.querySelectorAll('option')].filter(o => o.selected)[0] !== undefined){
+                searchbutton.removeAttribute('disabled')
+              
+            } else {
+                searchbutton.setAttribute('disabled', 'true')
+            }
+        })
+        symptomButtonContainer.appendChild(button)
     })
     document.querySelector('#symptomsGroup').style['display'] = 'block'
-    $('#symptoms').selectpicker('refresh')
+
 }
 
-const initSearchButton = () => {
-    let searchButton = document.querySelector('#searchButton')
-    let areaPicker = document.querySelector('#area')
-    let symptomsPicker = document.querySelector('#symptoms')
-    searchButton.addEventListener('click', () => {
-        document.querySelector('#disaesCard').style['display'] = 'block'
-        sendStatistic([...areaPicker.querySelectorAll('option')].filter(o => o.selected)[0].value, [...symptomsPicker.querySelectorAll('option')].filter(o => o.selected).map(o => o.value))
-        getDisaesBySymptoms([...symptomsPicker.querySelectorAll('option')].filter(o => o.selected).map(o => o.value))
-    })
-}
 
-const initSymptomsRestCall = () => {
-    let symptomsPicker = document.querySelector('#symptoms')
-    let searchButton = document.querySelector('#searchButton')
-    symptomsPicker.addEventListener('change', () => {
-        if ([...symptomsPicker.querySelectorAll('option')].filter(o => o.selected).length > 0) {
-            searchButton.style['display'] = 'block'
-        } else {
-            searchButton.style['display'] = 'none'
-        }
-    })
-}
+
+
 
 const sendStatistic = (area, symptoms) => {
     let xhr = new XMLHttpRequest()
@@ -115,7 +125,7 @@ const disaeCard = disae => {
     <a href='/disae/show/${disae._id}'>
         <div class='card' style='width: 30%; display: inline-block;margin: 10px;'>
             <div class='card-header'>
-                ${disae.name} (${disae.spec.name})
+                ${disae.name}
             </div>
             <div class='card-body'>
                 ${disae.description}

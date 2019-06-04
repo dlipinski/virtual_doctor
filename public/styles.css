@@ -15,11 +15,8 @@ main.container {
     text-align: center;
 }
 
-#searchButton {
-    display: none;
-}
 
-#adisaesCard {
+#disaesCard {
     display: none;
 }
 
@@ -32,4 +29,7 @@ main.container {
 }
 .icon-plus:before {
     content: "\ea0a";
+  }
+  .icon-search:before {
+    content: "\e986";
   }
