@@ -26,10 +26,14 @@ html(lang='pl')
                 .card-header= `Answers (${ question.answers.length })`
                 .card-body
                     if  question.answers.length > 0
-                        each answer in question.answers
+                        each answer in question.answers.sort(a => a.rating - 5).reverse()
                             .card.mt-2
                                 .card-header
-                                     a(href='user/show/asd') nazwa uzytkownika
+                                    .row
+                                        .col
+                                             a(href='user/show/asd') nazwa uzytkownika
+                                        .col.text-right= `${answer.rating}/5`
+                                    
                                 .card-body= answer.content
                     else
                         h6.text-center.text-muted No answers to show

@@ -37,6 +37,7 @@ exports.create_post = (req, res) => {
         disae.spec = spec
         Symptom.find({ _id : { $in: req.body.symptoms } })
         .exec((err, symptoms) => {
+            if (err) console.log(err)
             disae.symptoms = symptoms
             disae.save((err) => {
                 if (err) console.log(err)

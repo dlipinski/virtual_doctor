@@ -14,6 +14,7 @@ exports.show = (req, res) => {
     Question.findOne({ _id: req.params.id })
     .populate('answers')
     .exec((err, question) => {
+        if (err) console.log(err)
         res.render('question/show', { question })
     })
 }
@@ -22,6 +23,7 @@ exports.create_get = (req, res) => {
     Disae.findById(
         req.params.disaeId,
         (err, disae) => {
+            if (err) console.log(err)
             res.render('question/create', { disae })
         }
     )
@@ -34,6 +36,7 @@ exports.create_post = (req, res) => {
     Disae.findById(
         req.body.disae_id,
         (err, disae) => {
+            if (err) console.log(err)
             question.save()
             disae.questions.push(question)
             disae.save()

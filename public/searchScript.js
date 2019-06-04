@@ -15,6 +15,7 @@ const initAreaRestCall = () => {
     let areaButtons = document.querySelectorAll('.area-button')
     areaButtons.forEach(button => {
         button.addEventListener('click', () => {
+            ;[...document.querySelector('#symptoms_buttons').children].forEach(but => {but.remove()})
             document.querySelector('#disaesCard').style['display'] = 'none'
             let areaId = button.id
             if([...areaButtons].filter(b => b.classList.contains('active'))[0] !== undefined) {
@@ -45,7 +46,6 @@ const fillSymptoms = symptoms => {
     let areaPicker = document.querySelector('#area')
     let searchbutton = document.querySelector('#searchButton')
     let symptomButtonContainer = document.querySelector('#symptoms_buttons')
-    symptomButtonContainer.innerHTML = ''
     symptomsPicker.innerHTML = ''
     searchbutton.addEventListener('click', () => {
         document.querySelector('#disaesCard').style['display'] = 'block'
