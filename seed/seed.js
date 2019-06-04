@@ -12,7 +12,6 @@ const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, () => {
     mongoose.connection.db.dropDatabase()
-
     /* --- AREA --- */
     let legs = new Area({ name: 'Nogi' })
     legs.save()
@@ -159,10 +158,7 @@ mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, (
 
 
 
-setTimeout(() => {
-    process.exit()
-    console.log('Seeded')
-},2000)
+
 
 /*
 $disease = new Disease();
