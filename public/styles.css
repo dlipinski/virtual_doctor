@@ -1,19 +1,35 @@
 main.container {
     margin-top: 10px;
 }
+
 .my-form {
     float: right;
 }
-#symptomsGroup{
+
+#symptomsGroup {
     display: none;
 }
+
 #disaeContainer {
-    padding:10px;
+    padding: 10px;
     text-align: center;
 }
-#searchButton{
+
+#searchButton {
     display: none;
 }
-#disaesCard{
+
+#adisaesCard {
     display: none;
 }
+
+.icon-bin:before {
+    content: "\e9ac";
+}
+
+.icon-pencil:before {
+    content: "\e905";
+}
+.icon-plus:before {
+    content: "\ea0a";
+  }

@@ -73,6 +73,13 @@ exports.update_post = (req, res) => {
     )
 }
 
+exports.show = (req, res) => {
+    Disae.findById( req.params.id, (err, disae) => {
+        if (err) console.log(err)
+        res.render('disae/show', { disae })
+    })
+}
+
 exports.remove = (req, res) => {
     Disae.findOneAndRemove(
         { _id: req.params.id },

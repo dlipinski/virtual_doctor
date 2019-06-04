@@ -28,9 +28,11 @@ html(lang='pl')
                                         tr
                                             td= spec.name
                                             td.text-right
-                                                a.btn.btn-primary.mr-3(href='/spec/update/'+spec.id) update
+                                                a.btn.btn-primary.mr-3.btn-sm(href='/spec/update/'+spec.id)
+                                                    span.icon-pencil
                                                 form.my-form(action='/spec/remove/'+spec.id, method='POST')
-                                                    button.btn.btn-danger(type='submit') remove
+                                                    button.btn.btn-danger.btn-sm(type='submit')
+                                                        span.icon-bin
                     else
                         h6.text-center.text-muted No specs to show
 

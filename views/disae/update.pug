@@ -13,11 +13,11 @@ html(lang='pl')
                     form(action=`/disae/update/${disae.id}`, method='POST')
                         .form-group
                             label(for='name') Name
-                            input.form-control(name='name', value=disae.name)
+                            input.form-control(name='name', value= disae.name)
                             small.form-text.text-muted Fill name
                         .form-group
                             label(for='desciption') Description
-                            textarea.form-control(name='desciption', value=disae.desciption)
+                            textarea.form-control(name='description')= disae.description
                             small.form-text.text-muted Fill desciption
                         .form-group
                             label(for='propability') Propability
@@ -40,9 +40,9 @@ html(lang='pl')
                             select.selectpicker.form-control(name='spec', data-live-search="true")
                                 each spec in specs
                                         if spec.id == disae.spec.id
-                                            option(value=spec.id, selected)= spec.name
+                                            option(value= spec.id, selected)= spec.name
                                         else
-                                            option(value=spec.id)= spec.name
+                                            option(value= spec.id)= spec.name
                             small.form-text.text-muted Select spec
                         .form-group
                             label(for='spec') Symptoms

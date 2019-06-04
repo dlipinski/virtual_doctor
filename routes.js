@@ -57,6 +57,8 @@ module.exports = () => {
     /* --- DISAE --- */
     /* list */
     router.get('/disae', disaeController.list)
+    /* show */
+    router.get('/disae/show/:id', disaeController.show)
     /* create */
     router.get('/disae/create', disaeController.create_get)
     router.post('/disae/create', disaeController.create_post)

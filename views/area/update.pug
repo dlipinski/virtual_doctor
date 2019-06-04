@@ -10,7 +10,7 @@ html(lang='pl')
                 .card-header 
                     h3 Update area
                 .card-body
-                    form(action=`/area/update/${area.id}`, method='POST')
+                    form(action='/area/update/'+area.id, method='POST')
                         .form-group
                             label(for='name') Name
                             input.form-control(name='name', value=area.name)

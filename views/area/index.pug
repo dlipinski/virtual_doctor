@@ -29,9 +29,11 @@ html(lang='pl')
                                         tr
                                             td= area.name
                                             td.text-right
-                                                a.btn.btn-primary.mr-3(href='/area/update/'+area.id) update
+                                                a.btn.btn-primary.btn-sm.mr-3(href='/area/update/'+area.id)
+                                                    span.icon-pencil
                                                 form.my-form(action='/area/remove/'+area.id, method='POST')
-                                                    button.btn.btn-danger(type='submit') remove
+                                                    button.btn.btn-danger.btn-sm(type='submit')
+                                                        span.icon-bin
                     else
                         h6.text-center.text-muted No areas to show
 

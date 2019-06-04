@@ -36,18 +36,30 @@ const initDatepicker = () => {
     let date = new Date()
     let today = new Date(date.getFullYear(), date.getMonth(), date.getDate())
 
-    $('#from_datepicker').datepicker({ autoclose: true, endDate : new Date()})
-    $('#to_datepicker').datepicker({ autoclose: true, endDate : new Date()})
-    
+    $('#from_datepicker').datepicker({
+        autoclose: true,
+        endDate: new Date(),
+        todayHighlight: true
+    })
+    $('#to_datepicker').datepicker({
+        autoclose: true,
+        endDate: new Date(),
+        todayHighlight: true
+    })
+
     $('#from_datepicker').datepicker('setDate', today)
     $('#to_datepicker').datepicker('setDate', today)
 
     let from = document.querySelector('#from_datepicker')
     let to = document.querySelector('#to_datepicker')
 
-    $('#from_datepicker').datepicker().on('changeDate', () => { datepickerHandler(`${from.value};${to.value}`) })
-    $('#to_datepicker').datepicker().on('changeDate', () => { datepickerHandler(`${from.value};${to.value}`) })
-  
+    $('#from_datepicker').datepicker().on('changeDate', () => {
+        datepickerHandler(`${from.value};${to.value}`)
+    })
+    $('#to_datepicker').datepicker().on('changeDate', () => {
+        datepickerHandler(`${from.value};${to.value}`)
+    })
+
 }
 
 const datepickerHandler = date => {
@@ -57,7 +69,7 @@ const datepickerHandler = date => {
             fillSearches(JSON.parse(xhr.responseText))
         }
     })
-    xhr.open('GET', `/search/searchesByDate/${encodeURIComponent(date)}` , true)
+    xhr.open('GET', `/search/searchesByDate/${encodeURIComponent(date)}`, true)
     xhr.send()
 }
 
@@ -85,4 +97,3 @@ const searchRow = search => {
         </tr>
     `
 }
-

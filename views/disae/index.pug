@@ -34,9 +34,12 @@ html(lang='pl')
                                             td= disae.spec.name
                                             td= disae.symptoms.map(s => s.name).join(',')
                                             td.text-right
-                                                a.btn.btn-primary.mr-3(href='/disae/update/'+disae.id) update
+                                                a.btn.btn-primary.mr-3.btn-sm(href='/disae/show/'+disae.id) show
+                                                a.btn.btn-primary.mr-3.btn-sm(href='/disae/update/'+disae.id)
+                                                    span.icon-pencil
                                                 form.my-form(action='/disae/remove/'+disae.id, method='POST')
-                                                    button.btn.btn-danger(type='submit') remove
+                                                    button.btn.btn-danger.btn-sm(type='submit')
+                                                        span.icon-bin
                     else
                         h6.text-center.text-muted No disaes to show
 
