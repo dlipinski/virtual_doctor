@@ -90,9 +90,7 @@ const searchRow = search => {
             <td>${new Date(search.createdAt).toLocaleString()}</td>
             <td>
                 <form class='my-form' action='/search/remove/${search.id}' method='POST'>
-                    <button class='btn btn-danger' type='submit'>
-                        remove
-                    </button>
+                <i class='far fa-trash-alt'></i>
                 </form>
             </td>
         </tr>

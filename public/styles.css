@@ -1,3 +1,9 @@
+body {
+    color: #424242;
+}
+h1,h2,h3,h4,h5,h6{
+    color: #424242;
+}
 main.container {
     margin-top: 20px;
 }
@@ -20,3 +26,9 @@ main.container {
     display: none;
 }
 
+.rating {
+    color: #424242;
+}
+.rating:hover {
+    color: #868686;
+}
