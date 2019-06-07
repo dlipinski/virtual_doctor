@@ -20,16 +20,3 @@ main.container {
     display: none;
 }
 
-.icon-bin:before {
-    content: "\e9ac";
-}
-
-.icon-pencil:before {
-    content: "\e905";
-}
-.icon-plus:before {
-    content: "\ea0a";
-  }
-  .icon-search:before {
-    content: "\e986";
-  }

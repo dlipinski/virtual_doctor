@@ -3,6 +3,7 @@ const router = require('express').Router()
 const searchController = require('./controllers/searchController')
 
 const questionController = require('./controllers/questionController')
+const answerController = require('./controllers/answerController')
 
 const areaController = require('./controllers/areaController')
 const specController = require('./controllers/specController')
@@ -26,6 +27,10 @@ module.exports = () => {
     router.get('/question/create/:disaeId', questionController.create_get)
     router.post('/question/create', questionController.create_post)
     router.post('/question/remove/:id', questionController.remove)
+
+    /* --- ANSWER --- */
+    router.post('/answer/create/', answerController.create_post)
+    router.post('/answer/rate/:id', answerController.rate)
 
     /* --- AREA --- */
     /* list */

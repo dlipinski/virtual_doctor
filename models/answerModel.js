@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 
 const answerModel = new mongoose.Schema({
     content : String,
-    rating: Number
+    ratingSum: Number,
+    ratingCount: Number
 })
 
 answerModel.set('timestamps', true)

@@ -31,10 +31,10 @@ html(lang='pl')
                                             td= symptom.area.name
                                             td.text-right
                                                 a.btn.btn-primary.mr-3.btn-sm(href='/symptom/update/'+symptom.id)
-                                                    span.icon-pencil
+                                                    i.far.fa-edit
                                                 form.my-form(action='/symptom/remove/'+symptom.id, method='POST')
                                                     button.btn.btn-danger.btn-sm(type='submit')
-                                                        span.icon-bin
+                                                        i.far.fa-trash-alt
                     else
                         h6.text-center.text-muted No symptoms to show
 

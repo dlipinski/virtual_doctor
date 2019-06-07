@@ -29,6 +29,7 @@ exports.update_get = (req, res) => {
         res.render('area/update', { area })
     })
 }
+
 exports.update_post = (req, res) => {
     Area.findByIdAndUpdate(
         req.params.id,

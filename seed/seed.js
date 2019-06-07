@@ -10,8 +10,11 @@ const Answer = require('../models/answerModel')
 const mongoose = require('mongoose')
 
 
+
 mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, () => {
+
     mongoose.connection.db.dropDatabase()
+
     /* --- AREA --- */
     let legs = new Area({ name: 'Nogi' })
     legs.save()
@@ -143,7 +146,8 @@ mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, (
             for (let j=0; j<10; j++) {
                 let answer = new Answer({
                     content: `${ question.name } > content-${ j }`,
-                    rating: Math.floor(j/2)
+                    ratingCount: 10,
+                    ratingSum: j*10
                 })
                 answer.save()
                 question.answers.push(answer)

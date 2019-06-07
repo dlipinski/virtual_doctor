@@ -4,6 +4,7 @@ document.addEventListener('readystatechange', () => {
             initSearch()
         if (document.querySelector('#from_datepicker'))
             initDatepicker()
+        initStars()
     }
 })
 
@@ -96,4 +97,49 @@ const searchRow = search => {
             </td>
         </tr>
     `
+}
+
+
+const initStars = () => {
+    [...document.querySelectorAll('.rating')].forEach( rating => {
+        let stars = [...rating.children]
+        stars.forEach( (star, index) => {
+            star.addEventListener('mouseover', () => {
+                stars.forEach( star => {
+                    star.classList.remove('fas')
+                    star.classList.add('far')
+                })
+                star.classList.remove('far')
+                star.classList.add('fas')
+                for(let i=index; i>=0; i--) {
+                    stars[i].classList.remove('far')
+                    stars[i].classList.add('fas')
+                }
+            })
+            star.addEventListener('mouseout', () => {
+                star.classList.add('far')
+                star.classList.remove('fas')
+                for(let i=index; i>=0; i--) {
+                    stars[i].classList.add('far')
+                    stars[i].classList.remove('fas')
+                }
+            })
+        })
+        rating.addEventListener('mouseout', () => {
+            stars.forEach( (star, index) => {
+                if (index > parseInt(rating.id)){
+                    star.classList.remove('fas')
+                    star.classList.add('far')
+                } else {
+                    star.classList.remove('far')
+                    star.classList.add('fas')
+                }
+            })
+        })
+        rating.addEventListener('click', () => {
+            let val = rating.querySelectorAll('.fas').length
+            rating.querySelector('input').value = val
+            rating.querySelector('form').submit()
+        })
+    })
 }

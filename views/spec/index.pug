@@ -29,10 +29,10 @@ html(lang='pl')
                                             td= spec.name
                                             td.text-right
                                                 a.btn.btn-primary.mr-3.btn-sm(href='/spec/update/'+spec.id)
-                                                    span.icon-pencil
+                                                    i.far.fa-edit
                                                 form.my-form(action='/spec/remove/'+spec.id, method='POST')
                                                     button.btn.btn-danger.btn-sm(type='submit')
-                                                        span.icon-bin
+                                                        i.far.fa-trash-alt
                     else
                         h6.text-center.text-muted No specs to show
 
