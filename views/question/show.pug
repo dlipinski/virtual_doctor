@@ -31,7 +31,7 @@ html(lang='pl')
                                 .card-header
                                     .row
                                         .col
-                                             a(href='user/show/asd')= answer.user.realName
+                                             a(href=`/showDoctor/${ answer.user.id }`)= answer.user.realName
                                         .col.text-right
                                             if role == 'user'
                                                 span.rating(id=Math.floor(answer.ratingSum/answer.ratingCount))

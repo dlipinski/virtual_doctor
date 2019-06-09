@@ -1,6 +1,6 @@
 const User = require('../models/userModel')
 const Spec = require('../models/specModel')
-
+const Answer = require('../models/answerModel')
 
 exports.list = (req, res) => {
     User.find()
@@ -56,6 +56,27 @@ exports.set_unset_doctor = (req, res) => {
     )
 }
 
+exports.show_doctor = (req, res) => {
+    User.findById(req.params.id)
+    .populate('spec')
+    .exec((err, doctor) => {
+            Answer.find({ user: doctor.id })
+            .sort('-createdAt')
+            .exec( (err, answers) => {
+                let rate = 0
+                let count = 0
+                answers.forEach( a => {
+                    if(a.ratingCount > 1) {
+                        rate += a.ratingSum
+                        count += a.ratingCount
+                    }
+                })
+
+                res.render('user/showDoctor', { doctor, answers, rate: rate/count - 1, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined  } )
+            })
+        }
+    )
+}
 
 exports.remove = (req, res) => {
     User.findOneAndRemove(

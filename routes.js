@@ -36,6 +36,8 @@ module.exports = (passport) => {
     router.get('/account', isAuthenticated, isUserOrDoctor, userController.show)
     /* show */
     router.get('/show/:id', userController.show)
+    /* showDoctor */
+    router.get('/showDoctor/:id', userController.show_doctor)
     /* update */
     router.post('/user/update', isAuthenticated, isUserOrDoctor, userController.update)
     /* set/unset doctor */

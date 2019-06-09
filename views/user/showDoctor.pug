@@ -1,0 +1,36 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header
+                    h5= doctor.realName
+                .card-body
+                    h5.form-group= `Średnia ocena: ${ rate }/5`
+                    h5.form-group= `Specjalizacja: ${doctor.spec.name}`
+                    .mt-5
+                    .card
+                        .card-header= `Odpowiedzi lekarza (${ answers.length })`
+                        .card-body
+                            if  answers.length > 0
+                                each answer in answers.sort(a => a.rating - 5).reverse()
+                                    .card.mt-2
+                                        .card-header
+                                            .row
+                                                .col
+                                                    span= answer.createdAt.toLocaleString()
+                                                .col.text-right
+                                                    span
+                                                        each n in [1,2,3,4,5]
+                                                            if ((answer.ratingSum/answer.ratingCount) < n)
+                                                                i.far.fa-star
+                                                            else
+                                                                i.fas.fa-star
+                                                
+                                        .card-body= answer.content
+                            else
+                                h6.text-center.text-muted Brak odpowiedzi do wyświetlenia
