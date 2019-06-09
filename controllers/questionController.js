@@ -46,8 +46,8 @@ exports.create_post = (req, res) => {
     question.content = req.body.content
     question.user = req.user
     question.disae = req.body.disae_id
-    disae.save()
-    res.redirect(`/disae/show/${ disae._id }`)
+    question.save()
+    res.redirect(`/disae/show/${ req.body.disae_id }`)
 }
 
 exports.update_get = (req, res) => {
@@ -94,9 +94,11 @@ exports.waiting_questions = (req, res) => {
         if (err) console.log(err)
         let ids = [...answers.map(a => a._id)]
         Question.find({ _id: { $in: ids } })
+        .populate('disae')
         .exec( (err, questions) => {
             if (err) console.log(err)
-            res.render('question/waitingQuestions', { questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
+            let spec_questions = questions.filter(q => req.user.spec.toString() === q.disae.spec.toString())
+            res.render('question/waitingQuestions', { questions: spec_questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
         })
     })
 }
