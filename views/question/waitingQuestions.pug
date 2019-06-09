@@ -12,7 +12,7 @@ html(lang='pl')
                 .card-header
                     .row
                         .col
-                            h3 Moje pytania
+                            h3 Oczekujące pytania
                 .card-body
                     if questions.length > 0
                         .table-responsive
@@ -32,5 +32,5 @@ html(lang='pl')
                                             td=question.content
                                             td=question.createdAt.toLocaleString()
                     else
-                        h6.text-center.text-muted No questions to show
+                        h6.text-center.text-muted Brak pytań do wyświetlenia
 

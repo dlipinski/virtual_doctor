@@ -26,12 +26,12 @@ header
                             a.nav-link(href='/user') User
                     if role && role == 'doctor'
                         li.nav-item.active
-                            a.nav-link(href='/myAnswers') Moje odpowiedzi
+                            a.nav-link(href='/doctorAnswers') Moje odpowiedzi
                         li.nav-item.active
-                            a.nav-link(href='/waitingAnswers') Oczekujące pytania
+                            a.nav-link(href='/waitingQuestions') Oczekujące pytania
                     if role && role == 'user'
                         li.nav-item.active
-                            a.nav-link(href='/myQuestions') Moje pytania
+                            a.nav-link(href='/userQuestions') Moje pytania
                 .form-inline.mt-2.mt-md-0
                     if !username
                         ul.navbar-nav.mr-auto

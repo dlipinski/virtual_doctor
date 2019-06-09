@@ -46,6 +46,7 @@ exports.update_get = (req, res) => {
         })
     })
 }
+
 exports.update_post = (req, res) => {
     Symptom.findByIdAndUpdate(
         req.params.id,

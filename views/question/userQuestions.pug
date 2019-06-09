@@ -1,0 +1,36 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+        link(rel='stylesheet', href='/bootstrap-datepicker3.min.css')
+        script(src='/bootstrap-datepicker.min.js')
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header
+                    .row
+                        .col
+                            h3 Moje pytania
+                .card-body
+                    if questions.length > 0
+                        .table-responsive
+                            table.table.table-hover.border
+                                thead
+                                    tr
+                                        th Pytanie
+                                        th Tytuł
+                                        th Treść
+                                        th Data
+                                tbody
+                                    each question in questions
+                                        tr
+                                            td
+                                                a(href=`/question/show/${ question.id }`) Link
+                                            td=question.name
+                                            td=question.content
+                                            td=question.createdAt.toLocaleString()
+                    else
+                        h6.text-center.text-muted Brak pytań do wyświetlenia
+

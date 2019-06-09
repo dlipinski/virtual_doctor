@@ -1,7 +1,8 @@
 const Disae = require('../models/disaeModel')
-
 const Spec = require('../models/specModel')
 const Symptom = require('../models/symptomModel')
+
+const Question = require('../models/questionModel')
 
 exports.list = (req, res) => {
     Disae.find()
@@ -30,7 +31,6 @@ exports.create_post = (req, res) => {
     disae.name = req.body.name
     disae.description = req.body.description
     disae.propability = req.body.propability
-    console.log(disae.description)
     Spec.findById(req.body.spec)
     .exec((err, spec) => {
         if (err) console.log(err)
@@ -76,12 +76,16 @@ exports.update_post = (req, res) => {
 
 exports.show = (req, res) => {
     console.log(req.params.id)
-    Disae.findOne({ _id: req.params.id }) 
-    .populate('questions')
-    .populate({path : 'questions', populate : {path : 'user'}})
+    Disae.findOne({ _id: req.params.id })
     .exec((err, disae) => {
         if (err) console.log(err)
-        res.render('disae/show', { disae, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
+        Question.find({ disae: disae.id })
+        .populate('user')
+        .exec( (err, questions) => {
+            if (err) console.log(err)
+            res.render('disae/show', { disae, questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
+        })
+        
     })
 }
 

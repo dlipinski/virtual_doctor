@@ -4,7 +4,6 @@ const Disae = require('../models/disaeModel')
 
 exports.list = (req, res) => {
     Question.find()
-    .populate('disae')
     .populate('user')
     .exec((err, questions) => {
         if (err) console.log(err)
@@ -15,12 +14,18 @@ exports.list = (req, res) => {
 exports.show = (req, res) => {
     Question.findOne({ _id: req.params.id })
     .populate('user')
+    .populate('disae')
     .exec((err, question) => {
         if (err) console.log(err)
+        let isGoodSpec = false
+        if (req.user) {
+            isGoodSpec = req.user.spec.toString() === question.disae.spec.toString() ? true : false
+        }
         Answer.find({ question: question.id })
         .populate('user')
         .exec( (err, answers) => {
-            res.render('question/show', { question, answers, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
+            if (err) console.log(err)
+            res.render('question/show', { question, answers, isGoodSpec, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
         })
     })
 }
@@ -40,16 +45,9 @@ exports.create_post = (req, res) => {
     question.name = req.body.name
     question.content = req.body.content
     question.user = req.user
-    Disae.findById(
-        req.body.disae_id,
-        (err, disae) => {
-            if (err) console.log(err)
-            question.save()
-            disae.questions.push(question)
-            disae.save()
-            res.redirect(`/disae/show/${ disae._id }`)
-        }
-    )
+    question.disae = req.body.disae_id
+    disae.save()
+    res.redirect(`/disae/show/${ disae._id }`)
 }
 
 exports.update_get = (req, res) => {
@@ -86,6 +84,19 @@ exports.my_questions = (req, res) => {
     .populate('disae')
     .exec((err, questions) => {
         if (err) console.log(err)
-        res.render('question/myQuestions', { questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
+        res.render('question/userQuestions', { questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
+    })
+}
+
+exports.waiting_questions = (req, res) => {
+    Answer.find({ user : { $ne: req.user.id } })
+    .exec( (err, answers) => {
+        if (err) console.log(err)
+        let ids = [...answers.map(a => a._id)]
+        Question.find({ _id: { $in: ids } })
+        .exec( (err, questions) => {
+            if (err) console.log(err)
+            res.render('question/waitingQuestions', { questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
+        })
     })
 }

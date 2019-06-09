@@ -192,8 +192,8 @@ mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, (
                 answer.question = question
                 answer.save()
             }
+            question.disae = disae
             question.save()
-            disae.questions.push(question)
         }
         disae.save()
     })

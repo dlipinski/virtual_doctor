@@ -68,15 +68,19 @@ module.exports = (passport) => {
     /* delete */
     router.post('/question/remove/:id', isAuthenticated, isAdmin, questionController.remove)
     /* my questions */
-    router.get('/myQuestions', isAuthenticated, isUser, questionController.my_questions)
+    router.get('/userQuestions', isAuthenticated, isUser, questionController.my_questions)
+    /* user questions */
+    router.get('/userQuestions', isAuthenticated, isUser, questionController.my_questions)
+    /* doctor waiting questions */
+    router.get('/waitingQuestions', isAuthenticated, isDoctor, questionController.waiting_questions)
 
     /* --- ANSWER --- */
     /* create */
     router.post('/answer/create/', isAuthenticated, isDoctor, answerController.create_post)
     /* rate */
     router.post('/answer/rate/:id', isAuthenticated, isUser, answerController.rate)
-    /* my answers */
-    router.get('/myAnswers', isAuthenticated, isDoctor, answerController.my_answers)
+    /* doctor answers */
+    router.get('/doctorAnswers', isAuthenticated, isDoctor, answerController.my_answers)
 
     /* --- AREA --- */
     /* list */

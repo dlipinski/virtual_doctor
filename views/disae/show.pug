@@ -14,12 +14,12 @@ html(lang='pl')
                 .card-header 
                     .row
                         .col
-                            h3= `Pytania (${ disae.questions.length })`
+                            h3= `Pytania (${ questions.length })`
                         .col.text-right
                             if role === 'user'
                                 a.btn.btn-primary(href=`/question/create/${ disae._id }`) Zadaj pytanie
                 .card-body
-                    each question in disae.questions
+                    each question in questions
                         .card.mt-2
                             .card-header
                                 span= question.user.username

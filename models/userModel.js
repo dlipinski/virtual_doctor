@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-require('../models/specModel.js')
+require('./specModel')
 
 const UserSchema = mongoose.Schema({
     username: String,

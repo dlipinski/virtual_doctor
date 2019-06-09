@@ -10,7 +10,6 @@ exports.client_index = (req, res) => {
     Area.find()
     .exec((err, areas) => {
         if (err) console.log(err)
-        console.log(req.user)
         res.render('search/clientIndex', { areas, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
     })
 }

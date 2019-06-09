@@ -14,7 +14,7 @@ app.use(express.static('public'))
 
 mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true })
 
-app.use(session({ secret: 'Wielki$ekret44', saveUninitialized: true }))
+app.use(session({ secret: 'Wielki$ekret44', resave: true, saveUninitialized: true }))
 app.use(passport.initialize())
 app.use(passport.session())
 

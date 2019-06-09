@@ -27,6 +27,6 @@ exports.my_answers = (req, res) => {
     Answer.find({ user: req.user })
     .exec( (err, answers) => {
         if (err) console.log(err)
-        res.render('answer/myAnswers', { answers, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined  })
+        res.render('answer/doctorAnswers', { answers, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined  })
     })
 }

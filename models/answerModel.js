@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 
+require('./questionModel')
+require('./userModel')
+
 const answerModel = new mongoose.Schema({
     content : String,
     ratingSum: {

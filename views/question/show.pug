@@ -12,7 +12,7 @@ html(lang='pl')
                 .card-body
                     h3=question.name
                     span=question.content
-            if role === 'doctor'
+            if role === 'doctor' && isGoodSpec
                 .card.mt-3
                     .card-body
                         h5= `Dodaj odpowiedź, ${ username }`

@@ -1,12 +1,13 @@
 const mongoose = require('mongoose')
 
+require('./userModel')
 require('./disaeModel')
-require('./answerModel')
 
 const questionModel = new mongoose.Schema({
     name: String,
     content : String,
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    disae: { type: mongoose.Schema.Types.ObjectId, ref: 'Disae' }
 })
 
 questionModel.set('timestamps', true)
