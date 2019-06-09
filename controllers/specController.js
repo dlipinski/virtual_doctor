@@ -10,7 +10,7 @@ exports.list = (req, res) => {
 }
 
 exports.create_get = (req, res) => {
-    res.render('spec/create')
+    res.render('spec/create', {username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined  })
 }
 
 exports.create_post = (req, res) => {
