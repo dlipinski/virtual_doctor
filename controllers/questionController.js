@@ -5,6 +5,7 @@ const Disae = require('../models/disaeModel')
 exports.list = (req, res) => {
     Question.find()
     .populate('user')
+    .sort('-createdAt')
     .exec((err, questions) => {
         if (err) console.log(err)
         res.render('question', { questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
@@ -82,6 +83,7 @@ exports.remove = (req, res) => {
 exports.my_questions = (req, res) => {
     Question.find({ user: req.user })
     .populate('disae')
+    .sort('-createdAt')
     .exec((err, questions) => {
         if (err) console.log(err)
         res.render('question/userQuestions', { questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
@@ -89,16 +91,11 @@ exports.my_questions = (req, res) => {
 }
 
 exports.waiting_questions = (req, res) => {
-    Answer.find({ user : { $ne: req.user.id } })
-    .exec( (err, answers) => {
-        if (err) console.log(err)
-        let ids = [...answers.map(a => a._id)]
-        Question.find({ _id: { $in: ids } })
-        .populate('disae')
-        .exec( (err, questions) => {
-            if (err) console.log(err)
-            let spec_questions = questions.filter(q => req.user.spec.toString() === q.disae.spec.toString())
-            res.render('question/waitingQuestions', { questions: spec_questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
-        })
+    Question.find()
+    .populate('disae')
+    .sort('-createdAt')
+    .exec( (err, questions) => {
+        questions = questions.filter(q => q.disae.spec.toString() === req.user.spec.toString())
+        res.render('question/waitingQuestions', { questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
     })
 }

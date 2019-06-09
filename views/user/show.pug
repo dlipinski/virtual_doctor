@@ -11,7 +11,7 @@ html(lang='pl')
                     h5 Moje konto
                 .card-body
                     .form-group
-                            label(for='username') Nazwa uźytkownika
+                            label(for='username') Nazwa użytkownika
                             input.form-control(name='username', value=username, readonly)
                     form(action=`/user/update`, method='POST')
                         .form-group
@@ -25,5 +25,5 @@ html(lang='pl')
                                         option(value=spec.id, selected)= spec.name
                                     else
                                         option(value=spec.id)= spec.name
-                            small.form-text.text-muted Jeźeli jesteś lekarzem, wypełnij pola "Imię i nazwisko" oraz "Specjalizacja", kliknij "Uaktualnij dane" i wyślij prośbę o weryfikację na adres xxx@xxx.pl
+                            small.form-text.text-muted Jeżeli jesteś lekarzem, wypełnij pola "Imię i nazwisko" oraz "Specjalizacja", kliknij "Uaktualnij dane" i wyślij prośbę o weryfikację na adres xxx@xxx.pl
                         button.btn.btn-primary(type='submit') Uaktualnij dane

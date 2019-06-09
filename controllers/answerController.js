@@ -25,6 +25,7 @@ exports.rate = (req, res) => {
 
 exports.my_answers = (req, res) => {
     Answer.find({ user: req.user })
+    .sort('-createdAt')
     .exec( (err, answers) => {
         if (err) console.log(err)
         res.render('answer/doctorAnswers', { answers, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined  })

@@ -106,28 +106,28 @@ mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, (
     let uraz_nogi = new Disae({
         name: 'Uraz nogi',
         description: 'Udaj się do szpitala na rtg.',
-        spec: ogolny,
+        spec: noga,
         symptoms: [legs_hurt, legs_swollowing],
         propability:  1
     })
     let uraz_ręki = new Disae({
         name: 'Uraz ręki',
         description: 'Udaj się do szpitala na rtg.',
-        spec: ogolny,
+        spec: reka,
         symptoms: [arms_hurt, arms_swollowing],
         propability:  1
     })
     let naciagnieta_noga = new Disae({
         name: 'Naciągnięty mięsień nogi',
         description: 'Trzymaj obolałe miejsce w ciepłym.',
-        spec: ogolny,
+        spec: noga,
         symptoms: [legs_hurt],
         propability:  1
     })
     let naciagnieta_reka = new Disae({
         name: 'Naciągnięty mięsień ręki',
         description: 'Trzymaj obolałe miejsce w ciepłym.',
-        spec: ogolny,
+        spec: reka,
         symptoms: [arms_hurt],
         propability:  1
     })

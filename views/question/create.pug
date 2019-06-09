@@ -8,19 +8,19 @@ html(lang='pl')
         main.container
             .card
                 .card-header 
-                    h3 Ask a question
+                    h3 Zadaj pytanie
                 .card-body
                     form(action='/question/create', method='POST')
                         .form-group
-                            label(for='disae_name') Disae
+                            label(for='disae_name') Choroba
                             input.form-control(name='disae_name', readonly, value=disae.name)
                             input.form-control(name='disae_id', readonly, value=disae._id, hidden)
                         .form-group
-                            label(for='name') Title
+                            label(for='name') Tytuł
                             input.form-control(name='name')
                         .form-group
-                            label(for='content') Content
+                            label(for='content') Treść
                             textarea.form-control(name='content')
 
-                        button.btn.btn-primary(type='submit') Ask
+                        button.btn.btn-primary(type='submit') Zapytaj
                 
