@@ -33,15 +33,23 @@ html(lang='pl')
                                         .col
                                              a(href='user/show/asd')= answer.user.realName
                                         .col.text-right
-                                            span.rating(id=Math.floor(answer.ratingSum/answer.ratingCount))
-                                                form(action=`/answer/rate/${answer._id}`, method='POST')
-                                                    input(name='rate', value='0', hidden)
-                                                    input(name='question', value=question._id , hidden)
-                                                each n in [1,2,3,4,5]
-                                                    if((answer.ratingSum/answer.ratingCount) < n)
-                                                        i.far.fa-star
-                                                    else
-                                                        i.fas.fa-star
+                                            if role == 'user'
+                                                span.rating(id=Math.floor(answer.ratingSum/answer.ratingCount))
+                                                    form(action=`/answer/rate/${answer._id}`, method='POST')
+                                                        input(name='rate', value='0', hidden)
+                                                        input(name='question', value=question._id , hidden)
+                                                    each n in [1,2,3,4,5]
+                                                        if((answer.ratingSum/answer.ratingCount) < n)
+                                                            i.far.fa-star
+                                                        else
+                                                            i.fas.fa-star
+                                            else
+                                                span
+                                                    each n in [1,2,3,4,5]
+                                                        if ((answer.ratingSum/answer.ratingCount) < n)
+                                                            i.far.fa-star
+                                                        else
+                                                            i.fas.fa-star
                                         
                                 .card-body= answer.content
                     else

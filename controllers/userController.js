@@ -18,7 +18,7 @@ exports.show = (req, res) => {
             Spec.find()
             .exec( (err, specs) => {
                 if (err) console.log(err)
-                res.render('user/show', { username: user.username, realName: user.realName , userSpec: req.user.spec, specs })
+                res.render('user/show', { username: user.username, role: user.role, realName: user.realName , userSpec: req.user.spec, specs })
             })
         }
     )

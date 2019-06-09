@@ -13,7 +13,7 @@ module.exports = (passport) => {
         });
     });
 
-    // Setting up Passport Strategies for Login and SignUp/Registration
+    // Setting up Passport Strategies for Login and SignUp
     signin(passport)
     signup(passport)
 

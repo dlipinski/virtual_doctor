@@ -186,7 +186,7 @@ mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, (
                 let answer = new Answer({
                     content: `${ question.name } > content-${ j }`,
                     ratingCount: 10,
-                    ratingSum: j*10
+                    ratingSum: (j+1)*10
                 })
                 answer.user = doctors[disae.spec.id]
                 answer.question = question

@@ -116,7 +116,7 @@ const fillDisaes = disaes => {
             disaeContainer.innerHTML += disaeCard(disae)
         })
     } else {
-        disaeContainer.innerHTML = '<h6 class="text-center text-muted mt-3 mb-3">  No disaes to show </h6>'
+        disaeContainer.innerHTML = '<h6 class="text-center text-muted mt-3 mb-3">  Brak chorób do wyświetlenia </h6>'
     }
 }
 

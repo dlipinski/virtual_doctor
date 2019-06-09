@@ -74,7 +74,7 @@ module.exports = (passport) => {
     /* create */
     router.post('/answer/create/', isAuthenticated, isDoctor, answerController.create_post)
     /* rate */
-    router.post('/answer/rate/:id', answerController.rate)
+    router.post('/answer/rate/:id', isAuthenticated, isUser, answerController.rate)
     /* my answers */
     router.get('/myAnswers', isAuthenticated, isDoctor, answerController.my_answers)
 
@@ -149,7 +149,7 @@ const isDoctor = (req, res, next) => {
     res.redirect('/')
 }
 
-isUserOrDoctor = (req, res, next) => {
+const isUserOrDoctor = (req, res, next) => {
     if (req.user.role === 'user' || req.user.role === 'doctor')
         return next()
     res.redirect('/')
