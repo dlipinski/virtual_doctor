@@ -19,7 +19,7 @@ exports.show = (req, res) => {
     .exec((err, question) => {
         if (err) console.log(err)
         let isGoodSpec = false
-        if (req.user) {
+        if (req.user && req.user.spec) {
             isGoodSpec = req.user.spec.toString() === question.disae.spec.toString() ? true : false
         }
         Answer.find({ question: question.id })
