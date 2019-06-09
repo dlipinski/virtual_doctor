@@ -66,13 +66,10 @@ exports.show_doctor = (req, res) => {
                 let rate = 0
                 let count = 0
                 answers.forEach( a => {
-                    if(a.ratingCount > 1) {
-                        rate += a.ratingSum
-                        count += a.ratingCount
-                    }
+                    rate += Math.floor(a.ratingSum/a.ratingCount)
+                    count ++
                 })
-
-                res.render('user/showDoctor', { doctor, answers, rate: rate/count - 1, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined  } )
+                res.render('user/showDoctor', { doctor, answers, rate: Math.floor(rate/count) - 1, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined  } )
             })
         }
     )
