@@ -1,0 +1,22 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card(style='width: 300px; margin: 0 auto;')
+                .card-header 
+                    h3 Sign up
+                .card-body
+                    form(action='/signup', method='POST')
+                        .form-group
+                            input.form-control(name='username', placeholder='username')
+                        .form-group
+                            input.form-control(name='password', type='password', placeholder='password')
+                        .form-group
+                            input.form-control(type='password', placeholder='confirm password')
+
+                        button.btn.btn-primary.btn-block(type='submit') Sign up
+                

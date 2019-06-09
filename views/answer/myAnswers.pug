@@ -1,0 +1,31 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+        
+
+        main.container
+            .card
+                .card-header
+                    h3 Moje odpowiedzi
+                .card-body
+                    if answers.length > 0
+                        .table-responsive
+                            table.table.table-hover.border
+                                thead
+                                    tr
+                                        th Pytanie
+                                        th Treść
+                                        th Data
+                                tbody
+                                    each answer in answers
+                                        tr  
+                                            td
+                                                a(href=`/question/show/${ answer.question }`) Link
+                                            td= answer.content
+                                            td= answer.createdAt.toLocaleString()
+                    else
+                        h6.text-center.text-muted Brak odpowiedzi
+

@@ -5,7 +5,7 @@ exports.list = (req, res) => {
     Spec.find()
         .exec((err, specs) => {
             if (err) console.log(err)
-            res.render('spec', { specs })
+            res.render('spec', { specs, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
         })
 }
 
@@ -26,7 +26,7 @@ exports.update_get = (req, res) => {
     Spec.findById(req.params.id)
     .exec((err, spec) => {
         if (err) console.log(err)
-        res.render('spec/update', { spec })
+        res.render('spec/update', { spec, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
     })
 }
 

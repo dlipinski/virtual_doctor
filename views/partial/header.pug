@@ -2,26 +2,45 @@ header
     nav.navbar.navbar-dark.navbar-expand-md.bg-dark
         .container
             a.navbar-brand(href='/').p-0
-                Web Doctor
+                span Wirtualny Doktor
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#n',  aria-expanded="false",aria-label="Toggle navigation")
                 span.navbar-toggler-icon
+          
             #n.navbar-collapse.collapse
+                
                 ul.navbar-nav.mr-auto
-                    li.nav-item.active
-                        a.nav-link(href='/area') Area
-                    li.nav-item.active
-                        a.nav-link(href='/spec') Spec
-                    li.nav-item.active
-                        a.nav-link(href='/symptom') Symptom
-                    li.nav-item.active
-                        a.nav-link(href='/disae') Disae
-                    li.nav-item.active
-                        a.nav-link(href='/search') Search
-                    li.nav-item.active
-                        a.nav-link(href='/question') Question
+                    if role && role == 'admin'
+                        li.nav-item.active
+                            a.nav-link(href='/area') Area
+                        li.nav-item.active
+                            a.nav-link(href='/spec') Spec
+                        li.nav-item.active
+                            a.nav-link(href='/symptom') Symptom
+                        li.nav-item.active
+                            a.nav-link(href='/disae') Disae
+                        li.nav-item.active
+                            a.nav-link(href='/search') Search
+                        li.nav-item.active
+                            a.nav-link(href='/question') Question
+                        li.nav-item.active
+                            a.nav-link(href='/user') User
+                    if role && role == 'doctor'
+                        li.nav-item.active
+                            a.nav-link(href='/myAnswers') Moje odpowiedzi
+                        li.nav-item.active
+                            a.nav-link(href='/waitingAnswers') Oczekujące odpowiedzi
+                    if role && role == 'user'
+                        li.nav-item.active
+                            a.nav-link(href='/myQuestions') Moje pytania
                 .form-inline.mt-2.mt-md-0
-                    ul.navbar-nav.mr-auto
-                        li.nav-item
-                            a.nav-link.text-light(href='signin') Sign in
-                        li.nav-item
-                            a.btn.btn-outline-light(href='/signup') Sign up
+                    if !username
+                        ul.navbar-nav.mr-auto
+                            li.nav-item
+                                a.nav-link.text-light(href='/signin') Zaloguj
+                            li.nav-item
+                                a.btn.btn-outline-light(href='/signup') Zarejestruj się
+                    else
+                        a.text-light.mr-2(href=`/account`)= `${username}`
+                        ul.navbar-nav.mr-auto
+                            li.nav-item
+                                a.btn.btn-outline-light(href='/signout') Wyloguj

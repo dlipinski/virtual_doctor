@@ -1,0 +1,20 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card(style='width: 300px; margin: 0 auto;')
+                .card-header 
+                    h3 Zaloguj się
+                .card-body
+                    form(action='/signin', method='POST')
+                        .form-group
+                            input.form-control(name='username', placeholder='Nazwa uźytkownika')
+                        .form-group
+                            input.form-control(name='password', type='password', placeholder='Hasło')
+
+                        button.btn.btn-primary.btn-block(type='submit') Zaloguj
+                

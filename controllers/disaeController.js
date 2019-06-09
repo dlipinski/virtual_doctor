@@ -9,7 +9,7 @@ exports.list = (req, res) => {
     .populate('symptoms')
     .exec((err, disaes) => {
         if (err) console.log(err)
-        res.render('disae', { disaes })
+        res.render('disae', { disaes, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
     })
 }
 
@@ -20,7 +20,7 @@ exports.create_get = (req, res) => {
         Symptom.find()
         .exec((err, symptoms) => {
             if (err) console.log(err)
-            res.render('disae/create', { specs, symptoms })
+            res.render('disae/create', { specs, symptoms, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
         })
     })
 }
@@ -56,7 +56,7 @@ exports.update_get = (req, res) => {
             if (err) console.log(err)
             Disae.findById( req.params.id, (err, disae) => {
                 if (err) console.log(err)
-                res.render('disae/update', { disae, specs, symptoms })
+                res.render('disae/update', { disae, specs, symptoms, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
             })
         })
     })
@@ -78,9 +78,10 @@ exports.show = (req, res) => {
     console.log(req.params.id)
     Disae.findOne({ _id: req.params.id }) 
     .populate('questions')
+    .populate({path : 'questions', populate : {path : 'user'}})
     .exec((err, disae) => {
         if (err) console.log(err)
-        res.render('disae/show', { disae })
+        res.render('disae/show', { disae, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
     })
 }
 

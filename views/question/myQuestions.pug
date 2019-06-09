@@ -12,32 +12,25 @@ html(lang='pl')
                 .card-header
                     .row
                         .col
-                            h3 Questions
+                            h3 Moje pytania
                 .card-body
                     if questions.length > 0
-                        .form-group
-                            input.form-control#search(placeholder='Search')
                         .table-responsive
                             table.table.table-hover.border
                                 thead
                                     tr
-                                        th author
-                                        th name
-                                        th content
-                                        th date
-                                        th
+                                        th Pytanie
+                                        th Tytuł
+                                        th Treść
+                                        th Data
                                 tbody
                                     each question in questions
                                         tr
-                                            td=question.user.username
+                                            td
+                                                a(href=`/question/show/${ question.id }`) Link
                                             td=question.name
                                             td=question.content
                                             td=question.createdAt.toLocaleString()
-                                            td
-                                                a.btn.btn-primary.mr-3.btn-sm(href=`/question/show/${ question.id }`) show
-                                                form.my-form(action=`/question/remove/${question._id}`, method='POST')
-                                                    button.btn.btn-danger.btn-sm(type='submit') 
-                                                        i.far.fa-trash-alt
                     else
                         h6.text-center.text-muted No questions to show
 

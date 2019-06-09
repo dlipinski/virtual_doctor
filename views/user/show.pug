@@ -1,0 +1,29 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header
+                    h5 Moje konto
+                .card-body
+                    .form-group
+                            label(for='username') Nazwa uźytkownika
+                            input.form-control(name='username', value=username, readonly)
+                    form(action=`/user/update`, method='POST')
+                        .form-group
+                            label(for='realName') Imię i nazwisko
+                            input.form-control(name='realName', value=realName)
+                        .form-group
+                            label(for='spec') Specjalizacja
+                            select.selectpicker.form-control(name='spec', data-live-search="true")
+                                each spec in specs
+                                    if spec.id == userSpec
+                                        option(value=spec.id, selected)= spec.name
+                                    else
+                                        option(value=spec.id)= spec.name
+                            small.form-text.text-muted Jeźeli jesteś lekarzem, wypełnij pola "Imię i nazwisko" oraz "Specjalizacja", kliknij "Uaktualnij dane" i wyślij prośbę o weryfikację na adres xxx@xxx.pl
+                        button.btn.btn-primary(type='submit') Uaktualnij dane

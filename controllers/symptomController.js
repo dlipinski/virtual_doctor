@@ -7,7 +7,7 @@ exports.list = (req, res) => {
     .populate('area')
     .exec((err, symptoms) => {
         if (err) console.log(err)
-        res.render('symptom', { symptoms })
+        res.render('symptom', { symptoms, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
     })
 }
 
@@ -15,7 +15,7 @@ exports.create_get = (req, res) => {
     Area.find()
     .exec((err, areas) => {
         if (err) console.log(err)
-        res.render('symptom/create', { areas })
+        res.render('symptom/create', { areas, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
     })
 }
 
@@ -42,7 +42,7 @@ exports.update_get = (req, res) => {
         .populate('area')
         .exec((err, symptom) => {
             if (err) console.log(err)
-            res.render('symptom/update', { symptom, areas })
+            res.render('symptom/update', { symptom, areas, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
         })
     })
 }

@@ -5,12 +5,12 @@ exports.list = (req, res) => {
     Area.find()
     .exec((err, areas) => {
         if (err) console.log(err)
-        res.render('area', { areas })
+        res.render('area', { areas, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
     })
 }
 
 exports.create_get = (req, res) => {
-    res.render('area/create')
+    res.render('area/create', { username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
 }
 
 exports.create_post = (req, res) => {
@@ -26,7 +26,7 @@ exports.update_get = (req, res) => {
     Area.findById(req.params.id)
     .exec((err, area) => {
         if (err) console.log(err)
-        res.render('area/update', { area })
+        res.render('area/update', { area, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
     })
 }
 

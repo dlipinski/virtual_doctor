@@ -8,30 +8,30 @@ html(lang='pl')
         main.container
             .card
                 .card-header
-                    h5 Question
+                    h5= `Pytanie od ${question.user.username}`
                 .card-body
                     h3=question.name
                     span=question.content
+            if role === 'doctor'
+                .card.mt-3
+                    .card-body
+                        h5= `Dodaj odpowiedź, ${ username }`
+                        form(action='/answer/create', method='POST')
+                            .form-group
+                                input.form-control(name='question_id', readonly, value=question._id, hidden)
+                            .form-group
+                                textarea.form-control(name='content')
+                            button.btn.btn-primary(type='submit') Odpowiedz
             .card.mt-3
+                .card-header= `Odpowiedzi (${ answers.length })`
                 .card-body
-                    a(href='user/show/asd')
-                        h5 Nazwa obecnego uzytkownika
-                    form(action='/answer/create', method='POST')
-                        .form-group
-                            input.form-control(name='disae_id', readonly, value=question._id, hidden)
-                        .form-group
-                            textarea.form-control(name='content')
-                        button.btn.btn-primary(type='submit') Answer
-            .card.mt-3
-                .card-header= `Answers (${ question.answers.length })`
-                .card-body
-                    if  question.answers.length > 0
-                        each answer in question.answers.sort(a => a.rating - 5).reverse()
+                    if  answers.length > 0
+                        each answer in answers.sort(a => a.rating - 5).reverse()
                             .card.mt-2
                                 .card-header
                                     .row
                                         .col
-                                             a(href='user/show/asd') nazwa uzytkownika
+                                             a(href='user/show/asd')= answer.user.realName
                                         .col.text-right
                                             span.rating(id=Math.floor(answer.ratingSum/answer.ratingCount))
                                                 form(action=`/answer/rate/${answer._id}`, method='POST')
@@ -45,5 +45,5 @@ html(lang='pl')
                                         
                                 .card-body= answer.content
                     else
-                        h6.text-center.text-muted No answers to show
+                        h6.text-center.text-muted Brak odpowiedzi do wyświetlenia
                 

@@ -6,7 +6,7 @@ require('./answerModel')
 const questionModel = new mongoose.Schema({
     name: String,
     content : String,
-	answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }]
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 })
 
 questionModel.set('timestamps', true)

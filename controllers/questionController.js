@@ -1,21 +1,27 @@
 const Question = require('../models/questionModel')
+const Answer = require('../models/answerModel')
 const Disae = require('../models/disaeModel')
 
 exports.list = (req, res) => {
     Question.find()
     .populate('disae')
+    .populate('user')
     .exec((err, questions) => {
         if (err) console.log(err)
-        res.render('question', { questions })
+        res.render('question', { questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
     })
 }
 
 exports.show = (req, res) => {
     Question.findOne({ _id: req.params.id })
-    .populate('answers')
+    .populate('user')
     .exec((err, question) => {
         if (err) console.log(err)
-        res.render('question/show', { question })
+        Answer.find({ question: question.id })
+        .populate('user')
+        .exec( (err, answers) => {
+            res.render('question/show', { question, answers, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
+        })
     })
 }
 
@@ -24,7 +30,7 @@ exports.create_get = (req, res) => {
         req.params.disaeId,
         (err, disae) => {
             if (err) console.log(err)
-            res.render('question/create', { disae })
+            res.render('question/create', { disae, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
         }
     )
 }
@@ -33,6 +39,7 @@ exports.create_post = (req, res) => {
     let question = new Question()
     question.name = req.body.name
     question.content = req.body.content
+    question.user = req.user
     Disae.findById(
         req.body.disae_id,
         (err, disae) => {
@@ -49,7 +56,7 @@ exports.update_get = (req, res) => {
     Question.findById(req.params.id)
     .exec((err, question) => {
         if (err) console.log(err)
-        res.render('question/update', { question })
+        res.render('question/update', { question, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
     })
 }
 exports.update_post = (req, res) => {
@@ -72,4 +79,13 @@ exports.remove = (req, res) => {
             res.redirect(`/question`)
         }
     )       
+}
+
+exports.my_questions = (req, res) => {
+    Question.find({ user: req.user })
+    .populate('disae')
+    .exec((err, questions) => {
+        if (err) console.log(err)
+        res.render('question/myQuestions', { questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
+    })
 }

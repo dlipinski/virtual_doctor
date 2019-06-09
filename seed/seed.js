@@ -4,10 +4,13 @@ const Spec = require('../models/specModel')
 const Symptom = require('../models/symptomModel')
 const Disae = require('../models/disaeModel')
 
+const User = require('../models/userModel')
+
 const Question = require('../models/questionModel')
 const Answer = require('../models/answerModel')
 
 const mongoose = require('mongoose')
+const bCrypt = require('bcrypt-nodejs')
 
 
 
@@ -136,21 +139,58 @@ mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, (
         propability:  1
     })
    
+
+    /* USERS */
+    let admin = new User({
+        username: 'admin',
+        password: createHash('admin'),
+        role: 'admin'
+    })
+    admin.save()
+
+    let user1 = new User({
+        username: 'user1',
+        password: createHash('user1'),
+    })
+    user1.save()
+
+    let user2 = new User({
+        username: 'user2',
+        password: createHash('user2')
+    })
+    user2.save()
+
+    let doctors = {}
+    ;[ogolny, kardiolog, noga, reka].forEach( (spec, index) => {
+        let doctor = new User({
+            username: 'doctor' + index,
+            password: createHash('doctor'),
+            role: 'doctor',
+            realName: 'doctor realname ' + index,
+            spec: spec
+        })
+        doctor.save()
+        doctors[spec.id] = doctor
+    })
+    
+
     /* QUESTIONS + ANSWERS */
-    ;[grypa, zatrucie, uraz_nogi, uraz_ręki, naciagnieta_noga, naciagnieta_reka, zla_dieta].forEach(disae => {
+    ;[grypa, zatrucie, uraz_nogi, uraz_ręki, naciagnieta_noga, naciagnieta_reka, zla_dieta].forEach( (disae, index) => {
         for (let i=0; i<10; i++) {
             let question = new Question({
                 name: `${ disae.name } > name-${ i }`,
                 content: `content-${ i }-${ disae.name }`
             })
+            question.user = index % 2 === 0 ? user1 : user2
             for (let j=0; j<10; j++) {
                 let answer = new Answer({
                     content: `${ question.name } > content-${ j }`,
                     ratingCount: 10,
                     ratingSum: j*10
                 })
+                answer.user = doctors[disae.spec.id]
+                answer.question = question
                 answer.save()
-                question.answers.push(answer)
             }
             question.save()
             disae.questions.push(question)
@@ -161,66 +201,6 @@ mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, (
 })
 
 
-
-
-
-/*
-$disease = new Disease();
-        $disease->setName("Migrena");
-        $disease->setDescription("Udaj się do specjalisty.");
-        $disease->setProbability(180);
-        $disease->addRelationWithSymptom($head_strong_pain);
-        $disease->addRelationWithSymptom($overall_sickness);
-        $disease->addRelationWithSymptom($overall_bad_feel);
-        $manager->persist($disease);
-
-        $disease = new Disease();
-        $disease->setName("Przemęczenie");
-        $disease->setDescription("Odpocznij.");
-        $disease->setProbability(300);
-        $disease->addRelationWithSymptom($overall_bad_feel);
-        $disease->addRelationWithSymptom($head_pain);
-
-        $manager->persist($disease);
-
-        $disease = new Disease();
-        $disease->setName("Nerwoból");
-        $disease->setDescription("Odpocznij, ogranicz stres.");
-        $disease->setProbability(300);
-        $disease->addRelationWithSymptom($overall_bad_feel);
-        $disease->addRelationWithSymptom($corps_chest_pain);
-
-        $manager->persist($disease);
-
-        $disease = new Disease();
-        $disease->setName("Zapalenie ucha");
-        $disease->setDescription("Udaj się do Lekarza.");
-        $disease->setProbability(200);
-        $disease->addRelationWithSymptom($overall_temperature);
-        $disease->addRelationWithSymptom($head_ear_pain);
-        $manager->persist($disease);
-
-        $disease = new Disease();
-        $disease->setName("Depresja");
-        $disease->setDescription("Udaj się do Lekarza.");
-        $disease->setProbability(200);
-        $disease->addRelationWithSymptom($overall_bad_feel);
-
-        $manager->persist($disease);
-
-        $disease = new Disease();
-        $disease->setName("Przeziębienie");
-        $disease->setDescription("Wygrzej się.");
-        $disease->setProbability(300);
-        $disease->addRelationWithSymptom($overall_temperature);
-        $manager->persist($disease);
-
-        $disease = new Disease();
-        $disease->setName("Choroba skóry");
-        $disease->setDescription("Udaj się do dermatologa.");
-        $disease->setProbability(200);
-        $disease->addRelationWithSymptom($skin_itch);
-        $disease->addRelationWithSymptom($skin_rash);
-        $manager->persist($disease);
-
-*/
+const createHash = (password) => {
+    return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null)
+}

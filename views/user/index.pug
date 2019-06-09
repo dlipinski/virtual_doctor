@@ -1,0 +1,43 @@
+doctype html
+html(lang='pl')
+    head
+        include ../partial/head.pug
+    body
+        include ../partial/header.pug
+
+        main.container
+            .card
+                .card-header
+                    h3 Users
+                .card-body
+                    if users.length > 0
+                        .form-group
+                            input.form-control#search(placeholder='Search')
+                        .table-responsive
+                            table.table.table-hover.border
+                                thead
+                                    tr
+                                        th username
+                                        th real name
+                                        th role
+                                        th
+                                tbody
+                                    each user in users
+                                        tr
+                                            td= user.username
+                                            td= user.realName
+                                            td= user.role
+                                            td.text-right
+                                                a.btn.btn-primary.mr-3.btn-sm(href='/user/setUnsetDoctor/'+user.id)
+                                                    if user.role === 'user'
+                                                        span Set doctor
+                                                    else
+                                                        span Set user
+                                                form.my-form(action='/user/remove/'+user.id, method='POST')
+                                                    button.btn.btn-danger.btn-sm(type='submit')
+                                                        i.far.fa-trash-alt
+                    else
+                        h6.text-center.text-muted No users to show
+
+
+
