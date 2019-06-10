@@ -114,4 +114,4 @@ describe('RegisterTest', () => {
     })
 })
 
-//after(async () => driver.quit())
+after(async () => driver.quit())
