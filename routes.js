@@ -20,13 +20,15 @@ module.exports = (passport) => {
     router.get('/signin', loginController.signin_get)
 	router.post('/signin', passport.authenticate('signin', {
 		successRedirect: '/',
-		failureRedirect: 'signin',
+        failureRedirect: 'signin',
+        failureMessage: "Nieprawidłowa nazwa użytkownika lub hasło." 
     }))
     router.get('/signout', loginController.signout_post)
 	router.get('/signup', loginController.signup_get)
 	router.post('/signup', passport.authenticate('signup', {
 		successRedirect: '/',
-		failureRedirect: '/signup',
+        failureRedirect: '/signup',
+        failureMessage: "Nazwa użytkownika jest zajęta."
 	}))
 
     /* --- USER --- */

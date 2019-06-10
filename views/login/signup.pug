@@ -6,6 +6,8 @@ html(lang='pl')
         include ../partial/header.pug
 
         main.container
+            if message
+                    .alert.alert-danger.my-alert= message
             .card(style='width: 300px; margin: 0 auto;')
                 .card-header 
                     h3 Załóż nowe konto

@@ -11,13 +11,13 @@ module.exports = (passport) => {
                 (err, user) => {
                     if (err)
                         return done(err)
-                    if (!user){
-                        console.log('User Not Found with username ' + username);
-                        return done(null, false/*, req.flash('message', 'User Not found.')*/)                
+                    if (!user) {
+                        console.log('User Not Found with username ' + username)
+                        return done(null, false)                
                     }
                     if (!isValidPassword(user, password)) {
                         console.log('Invalid Password')
-                        return done(null, false/*, req.flash('message', 'Invalid Password')*/); // redirect back to login page
+                        return done(null, false)
                     }
                     return done(null, user)
                 }
