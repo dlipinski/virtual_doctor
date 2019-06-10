@@ -58,7 +58,7 @@ const fillSymptoms = symptoms => {
         option.value = symptom._id
         symptomsPicker.appendChild(option)
         let button = document.createElement('button')
-        button.classList.add('btn','btn-outline-info', 'mr-1')
+        button.classList.add('btn','btn-outline-info', 'mr-1', 'symptom-button')
         button.innerHTML = symptom.name
         button.addEventListener('click', () => {
             if (button.classList.contains('active')) {

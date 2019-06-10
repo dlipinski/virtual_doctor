@@ -138,7 +138,13 @@ mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, (
         symptoms: [arms_contractions, legs_contractions, general_mood],
         propability:  1
     })
-   
+    let migrena = new Disae({
+        name: 'Migrena',
+        description: 'Możesz wziac tabletkę przeciwbólową, napić się kawy lub się zdrzemnąć.',
+        spec: ogolny,
+        symptoms: [head_ear_hurt, head_hurt, head_very_hurt],
+        propability: 2
+    })
 
     /* USERS */
     let admin = new User({
@@ -175,7 +181,7 @@ mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, (
     
 
     /* QUESTIONS + ANSWERS */
-    ;[grypa, zatrucie, uraz_nogi, uraz_ręki, naciagnieta_noga, naciagnieta_reka, zla_dieta].forEach( (disae, index) => {
+    ;[migrena, grypa, zatrucie, uraz_nogi, uraz_ręki, naciagnieta_noga, naciagnieta_reka, zla_dieta].forEach( (disae, index) => {
         for (let i=0; i<10; i++) {
             let question = new Question({
                 name: `${ disae.name } > name-${ i }`,

@@ -8,6 +8,7 @@ const Disae = require('../models/disaeModel')
 
 exports.client_index = (req, res) => {
     Area.find()
+    .sort('name')
     .exec((err, areas) => {
         if (err) console.log(err)
         res.render('search/clientIndex', { areas, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })

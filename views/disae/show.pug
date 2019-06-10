@@ -20,7 +20,7 @@ html(lang='pl')
                                 a.btn.btn-primary(href=`/question/create/${ disae._id }`) Zadaj pytanie
                 .card-body
                     each question in questions
-                        .card.mt-2
+                        .card.mt-2.question
                             .card-header
                                 span= question.user.username
                                 
