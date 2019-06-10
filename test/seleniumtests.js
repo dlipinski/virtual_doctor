@@ -9,8 +9,8 @@ before(async () =>{
     await driver.get('http://localhost:3001/')
 })
 
-describe('TitleTest', () => {
-    it('should open page and return title', async () => {
+describe('LaunchPageTest', () => {
+    it('should open page', async () => {
         let title = await driver.getTitle()
 
         expect(title).to.equal('Web Doctor')
@@ -32,10 +32,10 @@ describe('UserTests', () => {
 
     it('ask question as a user', async () => {
         await driver.findElement(webdriver.By.className('area-button')).click()
-        await driver.sleep(500)
+        await driver.sleep(1000)
         await driver.findElement(webdriver.By.className('symptom-button')).click()
         await driver.findElement(webdriver.By.id('searchButton')).click()
-        await driver.sleep(500)
+        await driver.sleep(1000)
         await driver.findElement(webdriver.By.xpath('//*[@id="disaeContainer"]/a[1]/div/div[1]')).click()
         await driver.findElement(webdriver.By.xpath('/html/body/main/div[2]/div[1]/div/div[2]/a')).click()
         await driver.findElement(By.name('name')).sendKeys('My leg hurts')
@@ -47,6 +47,17 @@ describe('UserTests', () => {
         expect(question).to.equal('My leg hurts')
 
         await driver.findElement(By.className('btn btn-outline-light')).click()
+    })
+
+    it('should not login a user with wrong password', async () => {
+        await driver.findElement(webdriver.By.className('nav-link text-light')).click()
+        await driver.findElement(By.name('username')).sendKeys('user1')
+        await driver.findElement(By.name('password')).sendKeys('user')
+        await driver.findElement(webdriver.By.xpath('/html/body/main/div/div[2]/form/button')).click()
+
+        let wronguser = await driver.findElement(By.className('alert alert-danger my-alert')).getText()
+
+        expect(wronguser).to.equal('Nieprawidłowa nazwa użytkownika lub hasło.')
     })
 })
 
@@ -65,10 +76,10 @@ describe('DoctorTests', () => {
 
     it('answer the question of a user', async () => {
         await driver.findElement(webdriver.By.className('area-button')).click()
-        await driver.sleep(500)
+        await driver.sleep(1000)
         await driver.findElement(webdriver.By.className('symptom-button')).click()
         await driver.findElement(webdriver.By.id('searchButton')).click()
-        await driver.sleep(500)
+        await driver.sleep(1000)
         await driver.findElement(webdriver.By.xpath('//*[@id="disaeContainer"]/a[1]/div/div[1]')).click()
         await driver.findElement(webdriver.By.className('question')).click()
         await driver.findElement(By.name('content')).sendKeys('You should res for a while')
@@ -93,6 +104,29 @@ describe('AdminTests', () => {
         let Disea = await driver.findElement(By.xpath('//*[@id="n"]/ul/li[4]/a')).getAttribute('href')
 
         expect(Disea).to.equal('http://localhost:3001/disae')
+
+    })
+
+    it('should create new spec', async () => {
+        await driver.findElement(webdriver.By.xpath('//*[@id="n"]/ul/li[2]/a')).click()
+        await driver.findElement(webdriver.By.xpath('/html/body/main/div/div[1]/div/div[2]/a')).click()
+        await driver.findElement(By.name('name')).sendKeys('Ortopeda')
+        await driver.findElement(webdriver.By.xpath('/html/body/main/div/div[2]/form/button')).click()
+        await driver.sleep(1000)
+
+        let spec = await driver.findElement(By.xpath('/html/body/main/div/div[2]/div[2]/table/tbody/tr[5]/td[1]')).getText()
+
+        expect(spec).to.equal('Ortopeda')
+
+        await driver.findElement(By.xpath('/html/body/main/div/div[2]/div[2]/table/tbody/tr[5]/td[2]/form/button')).click()
+
+       
+    })
+
+    it('should delete user', async () => {
+        await driver.findElement(webdriver.By.xpath('//*[@id="n"]/ul/li[7]/a')).click()
+        await driver.findElement(webdriver.By.xpath('/html/body/main/div/div[2]/div[2]/table/tbody/tr[8]/td[4]/form/button')).click()
+
 
         await driver.findElement(By.className('btn btn-outline-light')).click()
     })
