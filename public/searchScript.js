@@ -91,23 +91,12 @@ const fillSymptoms = symptoms => {
 
 }
 
-
-
-
-
 const sendStatistic = (area, symptoms) => {
     let xhr = new XMLHttpRequest()
-    xhr.addEventListener('readystatechange', () => {
-        if (xhr.readyState == 4) {
-            console.log('Statistic send', area, symptoms)
-        }
-    })
     xhr.open('POST', `/search/create` , true)
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.send(JSON.stringify({ area, symptoms }))
 }
-
-
 
 const getDisaesBySymptoms = symptomsIds => {
     document.querySelector('#waitContainer').style.display='block'
@@ -117,7 +106,7 @@ const getDisaesBySymptoms = symptomsIds => {
             setTimeout(() => {
                 fillDisaes(JSON.parse(xhr.responseText))
                 document.querySelector('#waitContainer').style.display='none'
-            }, 300)
+            }, 200)
         }
     })
     xhr.open('GET', `/search/disaesBySymptoms/${symptomsIds.join(',')}` , true)
