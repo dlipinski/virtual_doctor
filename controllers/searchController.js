@@ -26,7 +26,6 @@ exports.symptoms_by_area = (req, res) => {
 exports.disaes_by_symptoms = (req, res) => {
     let symptoms = req.params.ids.split(',')
     Disae.find({ symptoms: { $in: symptoms }})
-    .populate('spec')
     .sort('-propability')
     .exec((err, disaes) => {
         if (err) console.log(err)
@@ -35,13 +34,15 @@ exports.disaes_by_symptoms = (req, res) => {
 }
 
 exports.create = (req, res) => {
-     let area = req.body.area
-     let symptoms = [...req.body.symptoms]
-     let search = new Search()
-     search.area = area
-     search.symptoms = symptoms
-     search.save((err) => {
-         if (err) console.log(err)
+    let area = req.body.area
+    let symptoms = [...req.body.symptoms]
+     
+    let search = new Search()
+    search.area = area
+    search.symptoms = symptoms
+    search.save((err) => {
+        if (err) console.log(err)
+        res.send('OK')
      })
  
 }
