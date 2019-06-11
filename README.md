@@ -1,5 +1,5 @@
 
-## Uruchomienie
+# Wirtualny lekarz (praca licencjacka)
 
 ### Wymagane oprogramowanie
 * Node
