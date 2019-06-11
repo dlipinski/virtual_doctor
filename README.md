@@ -6,20 +6,30 @@
 * npm
 * MongoDB 
 
-### Uruchomienie
+### Instalacja bibliotek
+W folderze projektu
 ```
-cd licencjat
-npm install 
+npm install
+```
+
+### Załadowanie danych
+W folderze projektu, po wcześniejszej instalacji bibliotek
+```
 node seed/seed.js
+```
+### Testowanie
+W folderze projektu, po wcześniejszej instalacji bibliotek i załadowaniu danych
+```
+node seed/seed.js
+```
+
+### Uruchomienie
+W folderze projektu, po wcześniejszej instalacji bibliotek i załadowaniu danych
+```
 npm start
 ```
 
-### Testy
+Portal będzie dostępny pod adresem 
 ```
-node seed/seed.js 
-npm start 
- ```
-
-
-### Polecany edytor i środowisko
-edytor: VS Code, czcionka: Fira Code, vs color theme: One Dark Pro Bold, grubość czcionki 600
+localhost:3001
+```
