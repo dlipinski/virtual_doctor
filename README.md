@@ -6,25 +6,25 @@
 * npm
 * MongoDB 
 
-### Instalacja bibliotek
+### Instalacja bibliotek {#b}
 W folderze projektu
 ```
 npm install
 ```
 
-### Załadowanie danych
-W folderze projektu, po wcześniejszej instalacji bibliotek
+### Załadowanie danych {#d}
+W folderze projektu, po wcześniejszej [instalacji bibliotek](#b)
 ```
 node seed/seed.js
 ```
 ### Testowanie
-W folderze projektu, po wcześniejszej instalacji bibliotek i załadowaniu danych
+W folderze projektu, po wcześniejszej [instalacji bibliotek](#b) i [załadowaniu danych](#d)
 ```
 npm test
 ```
 
 ### Uruchomienie
-W folderze projektu, po wcześniejszej instalacji bibliotek i załadowaniu danych
+W folderze projektu, po wcześniejszej [instalacji bibliotek](#b) i [załadowaniu danych](#d)
 ```
 npm start
 ```
