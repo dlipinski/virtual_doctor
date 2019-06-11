@@ -210,3 +210,12 @@ mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, (
 const createHash = (password) => {
     return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null)
 }
+
+let i=1
+setInterval(()=>{
+    console.log(`${i}/10`)
+    i++
+}, 1000)
+setTimeout(() => {
+    process.exit()
+},12 * 1000)
