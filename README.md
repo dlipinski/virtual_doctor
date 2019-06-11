@@ -7,14 +7,18 @@
 * MongoDB 
 
 ### Uruchomienie
-`` cd licencjat ``
-`` npm install ``
-`` node seed/seed.js `` - należy poczekać ok 20s i zatrzymać proces
-`` npm start ``
+```
+cd licencjat
+npm install 
+node seed/seed.js
+npm start
+```
 
-###Testy
-`` node seed/seed.js `` 
-`` npm start ``
+### Testy
+```
+node seed/seed.js 
+npm start 
+ ```
 
 
 ### Polecany edytor i środowisko
