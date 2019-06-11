@@ -24,6 +24,7 @@ exports.show = (req, res) => {
         }
         Answer.find({ question: question.id })
         .populate('user')
+        .sort('-createdAt')
         .exec( (err, answers) => {
             if (err) console.log(err)
             res.render('question/show', { question, answers, isGoodSpec, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })

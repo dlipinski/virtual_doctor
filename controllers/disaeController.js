@@ -81,6 +81,7 @@ exports.show = (req, res) => {
         if (err) console.log(err)
         Question.find({ disae: disae.id })
         .populate('user')
+        .sort('-createdAt')
         .exec( (err, questions) => {
             if (err) console.log(err)
             res.render('disae/show', { disae, questions, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
