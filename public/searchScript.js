@@ -68,7 +68,7 @@ const fillSymptoms = symptoms => {
                 option.setAttribute('selected', 'true')
                 button.classList.add('active')
             }
-            if([...symptomsPicker.querySelectorAll('option')].filter(o => o.selected)[0] !== undefined){
+            if ([...symptomsPicker.querySelectorAll('option')].filter(o => o.selected)[0] !== undefined){
                 searchbutton.removeAttribute('disabled')
               
             } else {

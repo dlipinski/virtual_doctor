@@ -1,27 +1,21 @@
-# licencjat
+
+## Uruchomienie
+
+### Wymagane oprogramowanie
+* Node
+* npm
+* MongoDB 
 
 ### Uruchomienie
-Należy zainstalować:
-1. NodeJS
-2. npm
-3. mongodb (i uruchomić : https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/) (inny system tez mozna sobie wybrac)
+`` cd licencjat ``
+`` npm install ``
+`` node seed/seed.js `` - należy poczekać ok 20s i zatrzymać proces
+`` npm start ``
 
-Potem:
-```
-git clone https://github.com/dlipinski/licencjat.git
-cd licencjat
-npm install
-```
+###Testy
+`` node seed/seed.js `` 
+`` npm start ``
 
-Teraz juź moźna zaseedowac:
-```
-node seed/seed.js
-```
-
-i uruchomić:
-```
-npm start
-```
 
 ### Polecany edytor i środowisko
 edytor: VS Code, czcionka: Fira Code, vs color theme: One Dark Pro Bold, grubość czcionki 600
