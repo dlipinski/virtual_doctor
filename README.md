@@ -20,7 +20,7 @@ node seed/seed.js
 ### Testowanie
 W folderze projektu, po wcześniejszej instalacji bibliotek i załadowaniu danych
 ```
-node seed/seed.js
+npm test
 ```
 
 ### Uruchomienie
