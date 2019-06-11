@@ -1,10 +1,10 @@
 
 # Wirtualny lekarz (praca licencjacka)
 
-### Wymagane oprogramowanie
-* Node (8.10.0 lub wyższa)
-* npm (6.9.0 lub wyższa)
-* MongoDB (3.6.3 lub wyższa)
+### Wymagane oprogramowanie (linki do instalacji)
+* Node (8.10.0 lub wyższa) [Link](https://nodejs.org/en/download/)
+* npm (6.9.0 lub wyższa) [Link](https://www.npmjs.com/package/npm)
+* MongoDB (3.6.3 lub wyższa) [Link](https://docs.mongodb.com/manual/administration/install-community/)
 
 ### Instalacja bibliotek
 W folderze projektu
