@@ -6,6 +6,10 @@
 * npm (6.9.0 lub wyższa) [Link](https://www.npmjs.com/package/npm)
 * MongoDB (3.6.3 lub wyższa) [Link](https://docs.mongodb.com/manual/administration/install-community/)
 
+### Uruchomienie bazy danych
+```
+mongod
+```
 ### Instalacja bibliotek
 W folderze projektu
 ```
