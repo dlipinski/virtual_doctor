@@ -1,5 +1,7 @@
-body {
+html, body {
     color: #424242;
+    height: 100%;
+    width:100;
 }
 h1,h2,h3,h4,h5,h6{
     color: #424242;
@@ -31,4 +33,29 @@ main.container {
 }
 .rating:hover {
     color: #868686;
+}
+
+#symptoms_buttons {
+    min-height: 78px;
+}
+#symptomsGroup{
+    display: none;
+}
+
+#waitContainer{
+    position: absolute;
+    z-index: 999;
+    background: white;
+    top: 0px;
+    bottom: 0px;
+    opacity: 0.8;
+    width: 100%;
+}
+.vertical-center{
+    display: block;
+
+    position: relative;
+    top: 50%;
+    margin: 0 auto;
+
 }

@@ -5,6 +5,8 @@ html(lang='pl')
         script(src='searchScript.js')
     body
         include ../partial/header.pug
+        
+
         main.container
             .card
                 .card-body
@@ -32,5 +34,6 @@ html(lang='pl')
 
 
 
-
+        #waitContainer(style='display:none')
+            img.vertical-center(src='/wait.gif')
 

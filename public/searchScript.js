@@ -13,9 +13,12 @@ const initApp = () => {
 const initAreaRestCall = () => {
     let areaPicker = document.querySelector('#area')
     let areaButtons = document.querySelectorAll('.area-button')
+    let symptomButtonContainer = document.querySelector('#symptoms_buttons')
+    let searchbutton = document.querySelector('#searchButton')
     areaButtons.forEach(button => {
         button.addEventListener('click', () => {
-            ;[...document.querySelector('#symptoms_buttons').children].forEach(but => {but.remove()})
+            symptomButtonContainer.innerHTML = ''
+            searchbutton.setAttribute('disabled', 'true')
             document.querySelector('#disaesCard').style['display'] = 'none'
             let areaId = button.id
             if([...areaButtons].filter(b => b.classList.contains('active'))[0] !== undefined) {
@@ -30,15 +33,22 @@ const initAreaRestCall = () => {
    
 }
 
+let symptoms = {}
+
 const getSymptomsByArea = areaId => {
-    let xhr = new XMLHttpRequest()
-    xhr.addEventListener('readystatechange', () => {
-        if (xhr.readyState == 4) {
-            fillSymptoms(JSON.parse(xhr.responseText))
-        }
-    })
-    xhr.open('GET', `/search/symptomsByArea/${areaId}` , true)
-    xhr.send()
+    if (symptoms[areaId]) {
+        fillSymptoms(symptoms[areaId])
+    } else {
+        let xhr = new XMLHttpRequest()
+        xhr.addEventListener('readystatechange', () => {
+            if (xhr.readyState == 4) {
+                symptoms[areaId] = JSON.parse(xhr.responseText)
+                fillSymptoms(symptoms[areaId])
+            }
+        })
+        xhr.open('GET', `/search/symptomsByArea/${areaId}` , true)
+        xhr.send()
+    }
 }
 
 const fillSymptoms = symptoms => {
@@ -97,11 +107,17 @@ const sendStatistic = (area, symptoms) => {
     xhr.send(JSON.stringify({ area, symptoms }))
 }
 
-const getDisaesBySymptoms = symptomsIds => { 
+
+
+const getDisaesBySymptoms = symptomsIds => {
+    document.querySelector('#waitContainer').style.display='block'
     let xhr = new XMLHttpRequest()
     xhr.addEventListener('readystatechange', () => {
-        if (xhr.readyState == 4) {
-            fillDisaes(JSON.parse(xhr.responseText))
+        if (xhr.readyState == 4) {          
+            setTimeout(() => {
+                fillDisaes(JSON.parse(xhr.responseText))
+                document.querySelector('#waitContainer').style.display='none'
+            }, 300)
         }
     })
     xhr.open('GET', `/search/disaesBySymptoms/${symptomsIds.join(',')}` , true)
@@ -134,3 +150,4 @@ const disaeCard = disae => {
     </a>
    `
 }
+
