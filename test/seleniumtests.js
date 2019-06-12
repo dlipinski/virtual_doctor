@@ -139,20 +139,18 @@ describe('AdminTests', () => {
        
     })
 
-    /*it('should delete user', async () => {
+    it('should delete user', async () => {
         await driver.findElement(webdriver.By.xpath('//*[@id="n"]/ul/li[7]/a')).click()
-       
-        let firstRowuser = await driver.findElement(By.xpath('//td[contains((text(), "test_user1"))]/following-sibling::tr')).getText()
-        await driver.findElement(webdriver.By.css('.delete')).click()
         await driver.sleep(1000)
-        let newFirstRowUser = await driver.findElement(By.css('.user-row .user-name')).getText()
+        await driver.findElement(By.css('.delete#test_user1')).click()
+        await driver.sleep(1000)
 
-        expect(firstRowuser).to.not.equal(newFirstRowUser)
+        let test_user1_count = await driver.findElements(By.css('.delete#test_user1'))
 
-        //await driver.findElement(By.className('btn btn-outline-light')).click()
-    })*/
+        expect(test_user1_count.length).to.equal(0)
+
+        await driver.findElement(By.className('btn btn-outline-light')).click()
+    })
 })
 
-
-
-//after(async () => driver.quit())
+after(async () => driver.quit())

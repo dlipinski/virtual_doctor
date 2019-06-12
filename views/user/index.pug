@@ -34,7 +34,7 @@ html(lang='pl')
                                                     else
                                                         span Set user
                                                 form.my-form(action='/user/remove/'+user.id, method='POST')
-                                                    button.btn.btn-danger.btn-sm.delete(type='submit')
+                                                    button.btn.btn-danger.btn-sm.delete(type='submit', id=user.username)
                                                         i.far.fa-trash-alt
                     else
                         h6.text-center.text-muted No users to show

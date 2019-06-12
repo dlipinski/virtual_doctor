@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(express.static('public'))
 
-mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true, useFindAndModify: false })
 
 app.use(session({ secret: 'Wielki$ekret44', resave: true, saveUninitialized: true }))
 app.use(passport.initialize())

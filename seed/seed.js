@@ -14,7 +14,7 @@ const bCrypt = require('bcrypt-nodejs')
 
 
 
-mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true }, () => {
+mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true, useFindAndModify: false }, () => {
 
     mongoose.connection.db.dropDatabase()
 
