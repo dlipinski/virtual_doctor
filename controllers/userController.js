@@ -1,6 +1,7 @@
 const User = require('../models/userModel')
 const Spec = require('../models/specModel')
 const Answer = require('../models/answerModel')
+const Question = require('../models/questionModel')
 
 exports.list = (req, res) => {
     User.find()
@@ -76,6 +77,17 @@ exports.show_doctor = (req, res) => {
 }
 
 exports.remove = (req, res) => {
+    Answer.deleteMany({
+        user: req.params.id
+    }, (err) => {
+        console.log(err)
+    })
+    Question.deleteMany({
+        user: req.params.id
+    }, (err) => {
+        console.log(err)
+    })
+
     User.findOneAndRemove(
         { _id: req.params.id },
         (err, user) => {
