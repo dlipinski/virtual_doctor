@@ -18,6 +18,10 @@ exports.show = (req, res) => {
     .populate('disae')
     .exec((err, question) => {
         if (err) console.log(err)
+        if (question == null) {
+            res.render('other/info', { info: 'To pytanie zostało usunięte',username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
+            return
+        }
         let isGoodSpec = false
         if (req.user && req.user.spec) {
             isGoodSpec = req.user.spec.toString() === question.disae.spec.toString() ? true : false
@@ -27,8 +31,8 @@ exports.show = (req, res) => {
         .sort('-createdAt')
         .exec( (err, answers) => {
             if (err) console.log(err)
-            res.render('question/show', { question, answers, isGoodSpec, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
-        })
+                res.render('question/show', { question, answers, isGoodSpec, username: req.user ? req.user.username : undefined, role: req.user ? req.user.role : undefined })
+        })    
     })
 }
 
