@@ -91,6 +91,12 @@ exports.show = (req, res) => {
 }
 
 exports.remove = (req, res) => {
+    Question.deleteMany({
+        disae: req.params.id
+    }, (err) => {
+        console.log(err)
+    })
+
     Disae.findOneAndRemove(
         { _id: req.params.id },
         (err, disae) => {
