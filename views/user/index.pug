@@ -23,8 +23,8 @@ html(lang='pl')
                                         th
                                 tbody
                                     each user in users
-                                        tr
-                                            td= user.username
+                                        tr.user-row
+                                            td.user-name= user.username
                                             td= user.realName
                                             td= user.role
                                             td.text-right
@@ -34,7 +34,7 @@ html(lang='pl')
                                                     else
                                                         span Set user
                                                 form.my-form(action='/user/remove/'+user.id, method='POST')
-                                                    button.btn.btn-danger.btn-sm(type='submit')
+                                                    button.btn.btn-danger.btn-sm.delete(type='submit')
                                                         i.far.fa-trash-alt
                     else
                         h6.text-center.text-muted No users to show

@@ -42,7 +42,7 @@ describe('UserTests', () => {
         await driver.findElement(By.name('content')).sendKeys('My leg hurts really bad')
         await driver.findElement(webdriver.By.xpath('/html/body/main/div/div[2]/form/button')).click()
 
-        let question = await driver.findElement(By.xpath('/html/body/main/div[2]/div[2]/div[11]/a/div/h5')).getText()
+        let question = await driver.findElement(By.css('.question h5')).getText()
 
         expect(question).to.equal('My leg hurts')
 
@@ -125,8 +125,13 @@ describe('AdminTests', () => {
 
     it('should delete user', async () => {
         await driver.findElement(webdriver.By.xpath('//*[@id="n"]/ul/li[7]/a')).click()
-        await driver.findElement(webdriver.By.xpath('/html/body/main/div/div[2]/div[2]/table/tbody/tr[8]/td[4]/form/button')).click()
+       
+        let firstRowuser = await driver.findElement(By.css('.user-row .user-name')).getText()
+        await driver.findElement(webdriver.By.css('.delete')).click()
+        await driver.sleep(1000)
+        let newFirstRowUser = await driver.findElement(By.css('.user-row .user-name')).getText()
 
+        expect(firstRowuser).to.not.equal(newFirstRowUser)
 
         await driver.findElement(By.className('btn btn-outline-light')).click()
     })
@@ -148,4 +153,4 @@ describe('RegisterTest', () => {
     })
 })
 
-after(async () => driver.quit())
+//after(async () => driver.quit())
