@@ -94,6 +94,22 @@ describe('DoctorTests', () => {
     })
 })
 
+describe('RegisterTest', () => {
+    it('should open page and register properly', async () => {
+        await driver.findElement(webdriver.By.xpath('//*[@id="n"]/div/ul/li[2]/a')).click()
+        await driver.findElement(By.name('username')).sendKeys('test_user1')
+        await driver.findElement(By.name('password')).sendKeys('test_user1')
+        await driver.findElement(By.className('confirm')).sendKeys('test_user1')
+        await driver.findElement(By.className('register')).click()
+
+        let registersuccess = await driver.findElement(By.xpath('//*[@id="n"]/div/a')).getText()
+
+        expect(registersuccess).to.equal('test_user1')
+
+        await driver.findElement(By.className('btn btn-outline-light')).click()
+    })
+})
+
 describe('AdminTests', () => {
     it('should open page and login as admin', async () => {
         await driver.findElement(webdriver.By.className('nav-link text-light')).click()
@@ -123,34 +139,20 @@ describe('AdminTests', () => {
        
     })
 
-    it('should delete user', async () => {
+    /*it('should delete user', async () => {
         await driver.findElement(webdriver.By.xpath('//*[@id="n"]/ul/li[7]/a')).click()
        
-        let firstRowuser = await driver.findElement(By.css('.user-row .user-name')).getText()
+        let firstRowuser = await driver.findElement(By.xpath('//td[contains((text(), "test_user1"))]/following-sibling::tr')).getText()
         await driver.findElement(webdriver.By.css('.delete')).click()
         await driver.sleep(1000)
         let newFirstRowUser = await driver.findElement(By.css('.user-row .user-name')).getText()
 
         expect(firstRowuser).to.not.equal(newFirstRowUser)
 
-        await driver.findElement(By.className('btn btn-outline-light')).click()
-    })
+        //await driver.findElement(By.className('btn btn-outline-light')).click()
+    })*/
 })
 
-describe('RegisterTest', () => {
-    it('should open page and register properly', async () => {
-        await driver.findElement(webdriver.By.xpath('//*[@id="n"]/div/ul/li[2]/a')).click()
-        await driver.findElement(By.name('username')).sendKeys('Test')
-        await driver.findElement(By.name('password')).sendKeys('test1')
-        await driver.findElement(By.className('confirm')).sendKeys('test1')
-        await driver.findElement(By.className('register')).click()
 
-        let registersuccess = await driver.findElement(By.xpath('//*[@id="n"]/div/a')).getText()
-
-        expect(registersuccess).to.equal('Test')
-
-        await driver.findElement(By.className('btn btn-outline-light')).click()
-    })
-})
 
 //after(async () => driver.quit())

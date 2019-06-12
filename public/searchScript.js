@@ -14,12 +14,10 @@ const initAreaRestCall = () => {
     let areaPicker = document.querySelector('#area')
     let areaButtons = document.querySelectorAll('.area-button')
     let symptomButtonContainer = document.querySelector('#symptoms_buttons')
-    let searchbutton = document.querySelector('#searchButton')
+
     areaButtons.forEach(button => {
         button.addEventListener('click', () => {
             symptomButtonContainer.innerHTML = ''
-            searchbutton.setAttribute('disabled', 'true')
-            document.querySelector('#disaesCard').style['display'] = 'none'
             let areaId = button.id
             if([...areaButtons].filter(b => b.classList.contains('active'))[0] !== undefined) {
                 ;[...areaButtons].filter(b => b.classList.contains('active'))[0].classList.remove('active')
@@ -52,42 +50,38 @@ const getSymptomsByArea = areaId => {
 }
 
 const fillSymptoms = symptoms => {
-    let symptomsPicker = document.querySelector('#symptoms')
     let areaPicker = document.querySelector('#area')
     let searchbutton = document.querySelector('#searchButton')
     let symptomButtonContainer = document.querySelector('#symptoms_buttons')
-    symptomsPicker.innerHTML = ''
+    let symptomsInput = document.querySelector('#symptoms')
     searchbutton.addEventListener('click', () => {
         document.querySelector('#disaesCard').style['display'] = 'block'
-        sendStatistic([...areaPicker.querySelectorAll('option')].filter(o => o.selected)[0].value, [...symptomsPicker.querySelectorAll('option')].filter(o => o.selected).map(o => o.value))
-        getDisaesBySymptoms([...symptomsPicker.querySelectorAll('option')].filter(o => o.selected).map(o => o.value))
+        sendStatistic([...areaPicker.querySelectorAll('option')].filter(o => o.selected)[0].value, symptomsInput.value.slice(0,-1).split(','))
+        getDisaesBySymptoms(symptomsInput.value.slice(0,-1).split(','))
     })
+    
     symptoms.forEach(symptom => {
-        let option = document.createElement('option')
-        option.innerHTML = symptom.name
-        option.value = symptom._id
-        symptomsPicker.appendChild(option)
         let button = document.createElement('button')
         button.classList.add('btn','btn-outline-info', 'mr-1', 'symptom-button')
+        if (symptomsInput.value.split(',').includes(symptom._id))
+            button.classList.add('active')
         button.innerHTML = symptom.name
         button.addEventListener('click', () => {
             if (button.classList.contains('active')) {
-                option.removeAttribute('selected')
+                symptomsInput.value = symptomsInput.value.replace(`${symptom._id},`,'')
                 button.classList.remove('active')
             } else {
-                option.setAttribute('selected', 'true')
+                symptomsInput.value = symptomsInput.value + `${symptom._id},`
                 button.classList.add('active')
             }
-            if ([...symptomsPicker.querySelectorAll('option')].filter(o => o.selected)[0] !== undefined){
+            if (symptomsInput.value.length > 1){
                 searchbutton.removeAttribute('disabled')
-              
             } else {
                 searchbutton.setAttribute('disabled', 'true')
             }
         })
         symptomButtonContainer.appendChild(button)
     })
-    document.querySelector('#symptomsGroup').style['display'] = 'block'
 
 }
 

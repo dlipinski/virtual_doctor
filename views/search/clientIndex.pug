@@ -21,8 +21,7 @@ html(lang='pl')
                     .card
                         .card-body#symptoms_buttons
                             h5.text-muted.text-center.mt-1 Wybierz obszar
-                    .form-group#symptomsGroup
-                            select#symptoms(name='symptoms', multiple, hidden)
+                    input#symptoms(style='display:none;')
                 .card-footer.p-0.bg-light
                     button#searchButton.btn.btn-primary.btn-block.text-center.rounded-bottom(disabled)
                         i.fas.fa-search
