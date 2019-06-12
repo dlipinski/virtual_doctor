@@ -29,6 +29,13 @@ exports.disaes_by_symptoms = (req, res) => {
     .sort('-propability')
     .exec((err, disaes) => {
         if (err) console.log(err)
+        disaes.forEach( d => {
+            d.symptoms_count = 0
+            symptoms.forEach( s => {
+                if (d.symptoms.includes(s)) d.symptoms_count ++
+            })
+        })
+        disaes = disaes.sort( (d1,d2) => d2.symptoms_count - d1.symptoms_count)
         res.send(JSON.stringify(disaes))
     })
 }
